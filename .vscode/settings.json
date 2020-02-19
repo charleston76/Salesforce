@@ -4,5 +4,6 @@
     "**/bower_components": true,
     "**/.sfdx": true
   },
+  "editor.renderWhitespace": "all", 
   "eslint.nodePath": "c:\\Users\\charleston.costa\\.vscode\\extensions\\salesforce.salesforcedx-vscode-lwc-48.1.0\\node_modules"
 }
