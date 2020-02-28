@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TreinamentoModuloId__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Treinamento/Modulo inscrito</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Defina seu treinamento/modulo</inlineHelpText>
+    <label>Treinamento Modulo</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>$Source.Ativo__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Treinamento_Modulo__c</referenceTo>
+    <relationshipLabel>Inscrições</relationshipLabel>
+    <relationshipName>Inscricoes</relationshipName>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

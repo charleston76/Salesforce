@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ativo__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Define o status da inscrição</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Informe o status da inscrição</inlineHelpText>
+    <label>Ativo</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
