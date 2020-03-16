@@ -5,7 +5,7 @@
     <description>Usuário inscrito</description>
     <externalId>false</externalId>
     <inlineHelpText>Defina seu nome de usuário</inlineHelpText>
-    <label>User</label>
+    <label>Inscrito</label>
     <referenceTo>User</referenceTo>
     <relationshipName>Inscricoes</relationshipName>
     <required>false</required>
