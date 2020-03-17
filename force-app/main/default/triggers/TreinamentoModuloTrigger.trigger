@@ -13,7 +13,7 @@
 trigger TreinamentoModuloTrigger on Treinamento_Modulo__c (before insert, before update, after insert, after update) {
     if (Trigger.isBefore && Trigger.isInsert) {
         if (TreinamentoModuloHelperClass.getTreinamentoModuloCadastrado(Trigger.new)){
-            Trigger.new[0].addError('Informação já cadastrado');
+            Trigger.new[0].addError('Informação já cadastrada');
         }
     }
 }
