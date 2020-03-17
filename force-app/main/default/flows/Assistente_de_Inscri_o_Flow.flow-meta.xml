@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Fluxo para inscrição dos usuários nos módulos dos treinamentos</description>
+    <dynamicChoiceSets>
+        <description>Carrega a lista de treinamentos ativos</description>
+        <name>recChoiceListaTreinamentoAtivo</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filters>
+            <field>Ativo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>Treinamento__c</object>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <formulas>
+        <description>Exibe o nome do usuário</description>
+        <name>UserName</name>
+        <dataType>String</dataType>
+        <expression>{!$User.FirstName} &amp;  &quot; &quot; &amp; {!$User.LastName}</expression>
+    </formulas>
+    <interviewLabel>Assistente de Inscrição Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Assistente de Inscrição Flow</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <description>Auxilia o usuário a se inscrever em módulos de treinamentos</description>
+        <name>Screen_Assistente_de_Inscri_o</name>
+        <label>Assistente de Inscrição</label>
+        <locationX>383</locationX>
+        <locationY>103</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>lblDisplay</name>
+            <fieldText>&lt;p&gt;Olá {!UserName}, por favor selecione um treinamento na lista!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>pklLista_de_Treinamentos</name>
+            <choiceReferences>recChoiceListaTreinamentoAtivo</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Lista de Treinamentos</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>142</locationX>
+        <locationY>104</locationY>
+        <connector>
+            <targetReference>Screen_Assistente_de_Inscri_o</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+</Flow>

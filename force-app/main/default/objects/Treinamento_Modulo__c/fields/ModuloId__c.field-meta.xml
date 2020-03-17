@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ModuloId__c</fullName>
+    <description>Modulo</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Defina o módulo a ser vinculado</inlineHelpText>
+    <label>Modulo</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Modulo__c.Ativo__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Modulo__c</referenceTo>
+    <relationshipLabel>Treinamento Modulos</relationshipLabel>
+    <relationshipName>Treinamento_Modulos</relationshipName>
+    <relationshipOrder>1</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
