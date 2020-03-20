@@ -11,7 +11,7 @@ public class TestDataFactory {
         return objList;
     }    
 
-    // Exemplo de carga dos objetos sem os IDs    
+    // Exemplo de carga dos objetos com os IDs para relacionamento
     public static List<Treinamento__c> loadTreinamentoComId(){
         List<Treinamento__c> objList = Test.loadData(Treinamento__c.sObjectType, 'TreinamentoComId');
         return objList;
@@ -26,5 +26,4 @@ public class TestDataFactory {
         List<Treinamento_Modulo__c> objList = Test.loadData(Treinamento_Modulo__c.sObjectType, 'TreinamentoModulo');
         return objList;
     }
-
 }
