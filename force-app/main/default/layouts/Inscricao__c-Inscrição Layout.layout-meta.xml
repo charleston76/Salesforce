@@ -15,10 +15,6 @@
                 <field>Ativo__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Carga_Horaria__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>TreinamentoModuloId__c</field>
             </layoutItems>
