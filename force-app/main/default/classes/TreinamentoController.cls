@@ -1,5 +1,5 @@
 public with sharing class TreinamentoController {
-    //Cacheable
+    @AuraEnabled(cacheable=true)
     public static List<Treinamento__c> getTreinamento(String strFiltro){
         List<Treinamento__c> objReturn = new List<Treinamento__c>();
         string strQuery = 'SELECT Id, Name, Descricao__c FROM Treinamento__c ';
