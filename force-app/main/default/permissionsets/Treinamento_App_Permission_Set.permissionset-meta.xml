@@ -79,6 +79,10 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabSettings>
+        <tab>Componentes_customizados</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Inscricao__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
