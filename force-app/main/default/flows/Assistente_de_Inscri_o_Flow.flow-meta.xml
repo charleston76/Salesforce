@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <name>ifModulosTreinamento</name>
+        <label>Verifica se tem modulos no treinamento</label>
+        <locationX>440</locationX>
+        <locationY>252</locationY>
+        <defaultConnector>
+            <targetReference>Screen_SemModulo</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Não tem modulos</defaultConnectorLabel>
+        <rules>
+            <name>Tem_modulos_no_treinamento</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getRecModulosDoTreinamento</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>getAccount</targetReference>
+            </connector>
+            <label>Tem modulos no treinamento</label>
+        </rules>
+    </decisions>
     <description>Fluxo para inscrição dos usuários nos módulos dos treinamentos</description>
     <dynamicChoiceSets>
         <description>Lista de treinamentos ativos</description>
@@ -43,6 +68,116 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>getAccount</name>
+        <label>Get Account</label>
+        <locationX>669</locationX>
+        <locationY>241</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Screen_Modulo</targetReference>
+        </connector>
+        <object>Account</object>
+        <outputReference>varAccountList</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Phone</queriedFields>
+        <queriedFields>Industry</queriedFields>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
+    </recordLookups>
+    <recordLookups>
+        <name>getRecModulosDoTreinamento</name>
+        <label>Carrega os módulos do treinamento</label>
+        <locationX>447</locationX>
+        <locationY>61</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ifModulosTreinamento</targetReference>
+        </connector>
+        <filters>
+            <field>TreinamentoId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varIdTreinamentoSelecionado.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Treinamento_Modulo__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Informaccoes_Selecionadas</name>
+        <label>Informacões Selecionadas</label>
+        <locationX>851</locationX>
+        <locationY>421</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>lblResultados</name>
+            <fieldText>&lt;p&gt;{!varSelectedIds}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_Modulo</name>
+        <label>Modulo</label>
+        <locationX>851</locationX>
+        <locationY>241</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Informaccoes_Selecionadas</targetReference>
+        </connector>
+        <fields>
+            <name>lwcModulo</name>
+            <extensionName>c:moduloFlowScreen</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>Accs</name>
+                <value>
+                    <elementReference>varAccountList</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectedAccsString</name>
+                <value>
+                    <elementReference>varSelectedIds</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>varAccountList</assignToReference>
+                <name>Accs</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>varSelectedIds</assignToReference>
+                <name>selectedAccsString</name>
+            </outputParameters>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_SemModulo</name>
+        <label>Não tem modulos</label>
+        <locationX>225</locationX>
+        <locationY>252</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>lblSemModulo</name>
+            <fieldText>&lt;p&gt;Desculpe, mas o treinamento que você escolheu não tem nenhum módulo relacionado!&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <description>Auxilia o usuário a se inscrever em módulos de treinamentos</description>
         <name>Screen_Treinamento</name>
@@ -52,6 +187,9 @@
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>getRecModulosDoTreinamento</targetReference>
+        </connector>
         <fields>
             <name>lblDisplay</name>
             <fieldText>&lt;p&gt;Olá {!UserName}, por favor selecione um treinamento na lista!&lt;/p&gt;</fieldText>
@@ -69,13 +207,21 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>117</locationX>
+        <locationX>127</locationX>
         <locationY>61</locationY>
         <connector>
             <targetReference>Screen_Treinamento</targetReference>
         </connector>
     </start>
     <status>Draft</status>
+    <variables>
+        <name>varAccountList</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
     <variables>
         <description>Id do treinamento selecionado</description>
         <name>varIdTreinamentoSelecionado</name>
@@ -84,5 +230,12 @@
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>Treinamento__c</objectType>
+    </variables>
+    <variables>
+        <name>varSelectedIds</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
     </variables>
 </Flow>
