@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- template for:each={Accs} for:item="acc"> 
+                    <template for:each={Accs} for:item="acc"> 
                         <tr key={acc.Id} class="slds-hint-parent">
                             <td data-label="Prospecting">
                                 <div class="slds-truncate" title="Select">
@@ -36,28 +36,24 @@
                                 <div class="slds-truncate" title="Phone">{acc.Phone}</div>
                             </td>
                         </tr>
-                    </template -->
-                    <template for:each={Accs} for:item="acc"> 
-                        <tr key={acc.Id} class="slds-hint-parent">
-                            <td data-label="Prospecting">
-                                <div class="slds-truncate" title="Select">
-                                    <!-- lightning-input type="checkbox-button" label="select" variant="label-hidden" onchange={handleCheck} name={acc.Id}></lightning-input -->
-                                    <lightning-input type="radio" label="select" variant="label-hidden" onchange={handleCheck} name={acc.Id}></lightning-input>
-                                </div>
-                            </td>                                
-                            <td data-label="Prospecting">
-                                <div class="slds-truncate" title="Account Name">{acc.Name}</div>
-                            </td>
-                            <td data-label="Confidence">
-                                <div class="slds-truncate" title="Industry">{acc.Industry}</div>
-                            </td>
-                            <td data-label="Confidence">
-                                <div class="slds-truncate" title="Phone">{acc.Phone}</div>
-                            </td>
-                        </tr>
                     </template>
                 </tbody>
             </table>
+            <lightning-card title="Seleção">
+                <div style="margin-left:3%;">
+                    <lightning-radio-group label="Modulo" 
+                                            name="radioButtonGroup" 
+                                            onchange={handleChange} 
+                                            options={radioOption}
+                                            value={radioValue}
+                                            type="radio"></lightning-radio-group>
+                    <br/>
+                    <div if:true={selectedValue}>
+                        Selected Vlaue: <b>{selectedValue}</b>
+                    </div>
+                </div>
+        
+            </lightning-card>            
         </div>
     </lightning-card>
 </template>
