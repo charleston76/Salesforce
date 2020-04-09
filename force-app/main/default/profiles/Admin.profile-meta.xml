@@ -35,6 +35,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TreinamentoFlowController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TreinamentoModuloHelperClass</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -86,6 +90,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Treinamento_Modulo__c-Treinamento Modulo Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Treinamento__c-Treinamento Layout</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
