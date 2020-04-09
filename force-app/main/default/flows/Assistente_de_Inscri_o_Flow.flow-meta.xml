@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <description>Atribui o valor do treinamento</description>
+        <name>attIdTreinamentoLWC</name>
+        <label>Atribuir ID Treinamento LWC</label>
+        <locationX>448</locationX>
+        <locationY>488</locationY>
+        <assignmentItems>
+            <assignToReference>varIdTreinamentoLwc</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>varIdTreinamentoSelecionado.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>getAccount</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>ifModulosTreinamento</name>
         <label>Verifica se tem modulos no treinamento</label>
@@ -20,7 +37,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>getAccount</targetReference>
+                <targetReference>attIdTreinamentoLWC</targetReference>
             </connector>
             <label>Tem modulos no treinamento</label>
         </rules>
@@ -71,8 +88,8 @@
     <recordLookups>
         <name>getAccount</name>
         <label>Get Account</label>
-        <locationX>669</locationX>
-        <locationY>241</locationY>
+        <locationX>864</locationX>
+        <locationY>102</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Screen_Modulo</targetReference>
@@ -109,8 +126,8 @@
     <screens>
         <name>Informaccoes_Selecionadas</name>
         <label>Informacões Selecionadas</label>
-        <locationX>851</locationX>
-        <locationY>421</locationY>
+        <locationX>870</locationX>
+        <locationY>403</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -125,14 +142,19 @@
     <screens>
         <name>Screen_Modulo</name>
         <label>Modulo</label>
-        <locationX>851</locationX>
-        <locationY>241</locationY>
+        <locationX>867</locationX>
+        <locationY>256</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Informaccoes_Selecionadas</targetReference>
         </connector>
+        <fields>
+            <name>lblDisplayLwc</name>
+            <fieldText>&lt;p&gt;ID {!varIdTreinamentoLwc}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
         <fields>
             <name>lwcModulo</name>
             <extensionName>c:moduloFlowScreen</extensionName>
@@ -221,6 +243,14 @@
         <isInput>true</isInput>
         <isOutput>true</isOutput>
         <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>Variável utilizada para carregar os módulos no componente LWC</description>
+        <name>varIdTreinamentoLwc</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
     </variables>
     <variables>
         <description>Id do treinamento selecionado</description>

@@ -1,48 +1,45 @@
-import { LightningElement, api,wire } from 'lwc';
+import { LightningElement, api,wire, track } from 'lwc';
 import getTreinamento from '@salesforce/apex/TreinamentoController.getTreinamento';
 
 export default class ModuloFlowScreen extends LightningElement {
+    @api varIdTreinamentoLwc;
     @api selectedAccs = [];
     @api selectedAccsString;
     @api Accs = [];
-    @api radioValue = '';
+    objResults = [];
 
-    @api objFiltro = {
+    @track objFiltro = {
         Id: '',
         Name: '',
         Descricao: ''
     };
 
-   @wire(getTreinamento, { strFiltro: JSON.stringify(objFiltro)}  ) 
-   ModulosAtivos;
+    @track strSearch = JSON.stringify(this.objFiltro);
 
-
-    get radioOptionMock() {
-        return [
-            { label: 'Opção 1', value: 'option1' },
-            { label: 'Opção 2', value: 'option2' },
-        ];
-    }
+    @wire(getTreinamento, { strFiltro: '$strSearch' } ) // 
+    wiredResult(data,error) { 
+        if(data){
+            this.objResults= data;
+        } else if(error){
+            console.log('error -->'+error);   
+        }
+    } 
 
     get radioOption()  {
-         let optionsValues = [ { label: 'Opção 1', value: 'option1' },
-                             { label: 'Opção 2', value: 'option2' }];
-        let test=[];
-        // console.log('ModulosAtivos optionsValues'); 
-        // //for( let i = 0; i < this.ModulosAtivos.length; i++) {
-        console.log('Antes do for  ' + this.ModulosAtivos);
-        console.log('length  ' + this.ModulosAtivos.length);
-            
-         for( let i = 0; i < optionsValues.length; i++) {
-             console.log('optionsValues ' + i);
-             test.push({
-                 label: optionsValues[i].label,
-                 value: optionsValues[i].value
-             })
-             console.log('test ' + test[i].label);
-        }
-        console.log('saiu ');
-        return test;
+        let vlrReturn=[];
+        // Tenho que fazer a tela entender esse cara para carregar os mudolos
+        // criar uma nova classe de modulos e mostrar tudo na tela no lugar dos treinamentos
+        console.log('varIdTreinamentoLwc - ' + this.varIdTreinamentoLwc);
+
+        if (this.objResults.data != undefined){
+             for( var i = 0; i < this.objResults.data.length; i++) {
+                 vlrReturn.push({
+                    label: this.objResults.data[i].Name,
+                    value: this.objResults.data[i].Id
+                })
+            }
+        } 
+        return vlrReturn;
       }
 
     handleCheck(event) {
