@@ -42,4 +42,5 @@ public with sharing class TreinamentoController {
 
         return strRetorno ;
     }
+
 }
