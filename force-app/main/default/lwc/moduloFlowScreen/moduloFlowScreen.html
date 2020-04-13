@@ -1,7 +1,7 @@
 <template>
     <lightning-card title="Accounts List" icon-name="standard:account">
         <div class="slds-p-around_x-small">
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <!-- table class="slds-table slds-table_cell-buffer slds-table_bordered">
                 <thead>
                     <tr class="slds-line-height_reset">
                         <th class="" scope="col">
@@ -38,17 +38,17 @@
                         </tr>
                     </template>
                 </tbody>
-            </table>
-            <label>ID value: {varIdTreinamentoLwc} </label>
-            
-            
+            </table -->
+            <label>varIdTreinamentoLwc: {varIdTreinamentoLwc} </label>
+
             <lightning-card title="Seleção">
                 <div style="margin-left:3%;">
                     <lightning-radio-group label="Modulo" 
+                                            id={varOptionModuloLwc}
                                             name="radioButtonGroup" 
                                             onchange={handleChange} 
                                             options={radioOption}
-                                            value={radioValue}
+                                            value={varIdModuloLwc}
                                             type="radio"></lightning-radio-group>
                     <br/>
                     <div if:true={selectedValue}>

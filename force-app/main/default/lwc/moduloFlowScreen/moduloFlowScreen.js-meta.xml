@@ -7,7 +7,9 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
-            <property name="varIdTreinamentoLwc" type="String[]" label="IdTreinamentoLwc" description="ID do treinamento LWC"/>
+            <property name="varIdTreinamentoLwc" type="String" label="Id treinamento Lwc" description="ID do treinamento LWC"/>
+            <property name="varIdModuloLwc" type="String" label="Id modulos Lwc" description="ID do modulo LWC" />
+            <property name="varOptionModuloLwc" type="String" label="Opcao selecionada do modulos Lwc" description="Opcao selecionada do modulo LWC" />
             <property name="Accs" type="@salesforce/schema/account[]" label="Accounts" description="list of Accounts"/>
             <property name="selectedAccs" type="String[]" label="Selected Accounts" description="Selected Account Ids"/>
             <property name="selectedAccsString" type="String" label="Selected Accounts String" description="Selected Account Ids"/>
