@@ -5,14 +5,11 @@ export default class ModuloFlowScreen extends LightningElement {
     @api varIdTreinamentoLwc;
     @api varIdModuloLwc;
     @api varOptionModuloLwc;
-    @api selectedAccs = [];
-    @api selectedAccsString;
-    @api Accs = [];
     objResults = [];
 
     @track objFiltro = {
         Id: '',
-        TreinamentoId: '',
+        TreinamentoId: varIdTreinamentoLwc,
         Name: '',
         Descricao: ''
     };
@@ -31,10 +28,6 @@ export default class ModuloFlowScreen extends LightningElement {
 
     get radioOption()  {
         let vlrReturn=[];
-        // Tenho que fazer a tela entender esse cara para carregar os mudolos
-        // criar uma nova classe de modulos e mostrar tudo na tela no lugar dos treinamentos
-        //console.log('varIdTreinamentoLwc - ' + this.varIdTreinamentoLwc);
-        //console.log('objResults.data ' + this.objResults.data);
         if (this.objResults.data != undefined){
              for( var i = 0; i < this.objResults.data.length; i++) {
                  vlrReturn.push({
@@ -45,35 +38,19 @@ export default class ModuloFlowScreen extends LightningElement {
         } 
         return vlrReturn;
       }
-
-    handleCheck(event) {
-        if(!this.selectedAccs.includes(event.currentTarget.name))
-            this.selectedAccs.push(event.currentTarget.name);
-        else {
-            for(let i = 0; i < this.selectedAccs.length; i++) {
-                if(event.currentTarget.name === this.selectedAccs[i])
-                this.selectedAccs.splice(i, 1);
-            }
-        }
-        
-        this.selectedAccsString = JSON.stringify(this.selectedAccs);
-        
-    }
-
     handleChange(event) {
         this.varIdModuloLwc = event.detail.value;
-        var Lista = this.radioOption;
-        var optLWC = this.varIdModuloLwc;
+        var rdoList = this.radioOption;
+        var rdoSelected  = this.varIdModuloLwc;
         //this.varOptionModuloLwc = event.detail[event.detail.value].label;
-        var optIndex = Lista.map(function (e) {
-            if (e.value == optLWC) {
+        var optIndex = rdoList.map(function (e) {
+            if (e.value == rdoSelected) {
                 return e.label;
             }
-        }).indexOf(Lista.label);
+        }).indexOf(rdoList.label);
 
-        this.varOptionModuloLwc = Lista[optIndex].label;
+        this.varOptionModuloLwc = rdoList[optIndex].label;
         console.log('varIdModuloLwc ' + this.varIdModuloLwc);
         console.log('varOptionModuloLwc ' + this.varOptionModuloLwc);
     }
-
 }

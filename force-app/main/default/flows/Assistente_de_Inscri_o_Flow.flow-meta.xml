@@ -91,16 +91,16 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <screens>
-        <name>Informaccoes_Selecionadas</name>
-        <label>Informacões Selecionadas</label>
-        <locationX>825</locationX>
-        <locationY>246</locationY>
+        <name>Screen_Confirmacao</name>
+        <label>Confirmação</label>
+        <locationX>806</locationX>
+        <locationY>247</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>lblResultados</name>
-            <fieldText>&lt;p&gt;Prezado(a)  {!UserName}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;varIdTreinamento = &lt;/span&gt;{!varIdTreinamento}&lt;/p&gt;&lt;p&gt;Confirma a inscrição no treinamento: &lt;b&gt;{!pklTreinamentosAtivos}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Modulo: &lt;b style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;{!varOptModulo}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;varIdModulo = &lt;/span&gt;{!varIdModulo}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Prezado(a)  &lt;b&gt;{!UserName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Para confirmar sua inscrição no treinamento &lt;b&gt;{!pklTreinamentosAtivos}&lt;/b&gt; e modulo &lt;b style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;{!varOptModulo}&lt;/b&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;, avance para o proximo passo.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Caso queira alterar, basta retornar ao passo anterior.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;varIdTreinamento = {!varIdTreinamento} &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;varIdModulo = {!varIdModulo}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -115,32 +115,20 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Informaccoes_Selecionadas</targetReference>
+            <targetReference>Screen_Confirmacao</targetReference>
         </connector>
         <fields>
             <name>lwcModulo</name>
             <extensionName>c:moduloFlowScreen</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>Accs</name>
+                <name>varIdModuloLwc</name>
                 <value>
-                    <elementReference>varAccountList</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>selectedAccsString</name>
-                <value>
-                    <elementReference>varSelectedIds</elementReference>
+                    <elementReference>varIdModulo</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>varIdTreinamentoLwc</name>
-                <value>
-                    <elementReference>varIdTreinamento</elementReference>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>varIdModuloLwc</name>
                 <value>
                     <elementReference>varIdModulo</elementReference>
                 </value>
@@ -153,20 +141,12 @@
             </inputParameters>
             <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>varAccountList</assignToReference>
-                <name>Accs</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>varSelectedIds</assignToReference>
-                <name>selectedAccsString</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>varIdTreinamento</assignToReference>
-                <name>varIdTreinamentoLwc</name>
+                <assignToReference>varIdModulo</assignToReference>
+                <name>varIdModuloLwc</name>
             </outputParameters>
             <outputParameters>
                 <assignToReference>varIdModulo</assignToReference>
-                <name>varIdModuloLwc</name>
+                <name>varIdTreinamentoLwc</name>
             </outputParameters>
             <outputParameters>
                 <assignToReference>varOptModulo</assignToReference>
@@ -262,13 +242,6 @@
     </variables>
     <variables>
         <name>varOptModulo</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-    </variables>
-    <variables>
-        <name>varSelectedIds</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
