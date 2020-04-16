@@ -1,21 +1,11 @@
 <template>
-    <lightning-card title="Accounts List" icon-name="standard:account">
-        <div class="slds-p-around_x-small">
-            <lightning-card title="Seleção">
-                <div style="margin-left:3%;">
-                    <lightning-radio-group label="Modulo" 
-                                            name="radioButtonGroup" 
-                                            onchange={handleChange} 
-                                            options={radioOption}
-                                            value={varIdModuloLwc}
-                                            type="radio"></lightning-radio-group>
-                    <br/>
-                    <div if:true={selectedValue}>
-                        Selected Vlaue: <b>{selectedValue}</b>
-                    </div>
-                </div>
-        
-            </lightning-card>            
-        </div>
-    </lightning-card>
+    <div style="margin-left:3%;">
+        <lightning-radio-group label="Selecione um modulo" icon-name="action:new_note"
+                                name="radioButtonGroup" required
+                                onchange={handleChange} 
+                                options={radioOption}
+                                value={varIdModuloLwc}
+                                type="radio"></lightning-radio-group>
+        <br/>
+    </div>
 </template>
