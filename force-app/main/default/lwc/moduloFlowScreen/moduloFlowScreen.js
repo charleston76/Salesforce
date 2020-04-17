@@ -1,23 +1,28 @@
-import { LightningElement, api,wire, track } from 'lwc';
-import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
+// Realiza as importações da plataforma
+import { LightningElement, api,wire} from 'lwc';
 import getModuloAtivoRelacionado from '@salesforce/apex/ModuloController.getModuloAtivoRelacionado';
 
 export default class ModuloFlowScreen extends LightningElement {
-    @api varIdTreinamentoLwc;
+    // Parâmetros explicitamente declarados no arquivo de meta.xml
+    // nas tags de targetConfig
+    @api varIdTreinamentoLwc; 
     @api varIdModuloLwc;
     @api varOptionModuloLwc;
+
+    // objeto para carga dos resultados através do wire
     objResults = [];
 
+    // Realiza a chamada do metodo da classe
     @wire(getModuloAtivoRelacionado, { Id: '',  TreinamentoId: '$varIdTreinamentoLwc', Name: '',  Descricao: '' , Ativo:'' } ) 
     wiredResult(data,error) { 
         if(data){
-            console.log('{Id:"",TreinamentoId:' + (this.varIdTreinamentoLwc == 'undefined' ? '' : this.varIdTreinamentoLwc ) +',Name:"",Descricao:""}');
             this.objResults= data;
         } else if(error){
             console.log('error -->'+error);   
         }
     } 
 
+    // Carrega o radio group
     get radioOption()  {
         let vlrReturn=[];
         if (this.objResults.data != undefined){
@@ -30,32 +35,28 @@ export default class ModuloFlowScreen extends LightningElement {
         } 
         return vlrReturn;
     }
-// VERIFICAR SE OS IDS DOS MODULOS E TREINAMENTOS ESTÃO CORRETOS, APESAR DO TEXTO...
+
+    // Altera o valor conforme seleção do usuário
     handleChange(event) {
         this.varIdModuloLwc = event.detail.value;
         var rdoList = this.radioOption;
         var rdoSelected  = this.varIdModuloLwc;
-        //this.varOptionModuloLwc = event.detail[event.detail.value].label;
-        var optIndex = rdoList.map(function (e) {
+        var getLabel ='';
+        rdoList.map(function (e) {
             if (e.value == rdoSelected) {
+                getLabel = e.label;
                 return e.label;
             }
-        }).indexOf(rdoList.label);
-
-        this.varOptionModuloLwc = rdoList[optIndex].label;
-        console.log('optIndex ' + optIndex);
-        console.log('varIdModuloLwc ' + this.varIdModuloLwc);
-        console.log('varOptionModuloLwc ' + this.varOptionModuloLwc);
+        });
+        this.varOptionModuloLwc =getLabel;
     }
 
+    // Valida a tela antes de ir par ao proximo
     @api
     validate() {
         if(this.varIdModuloLwc != null) { 
             return { isValid: true }; 
-        } 
-        else { 
-            // If the component is invalid, return the isValid parameter 
-            // as false and return an error message. 
+        } else { 
             return { 
                 isValid: false, 
                 errorMessage: 'Selecione um modulo na lista!' 
