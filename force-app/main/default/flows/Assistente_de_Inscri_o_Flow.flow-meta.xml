@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Enviar_Email</name>
+        <label>Enviar Email</label>
+        <locationX>725</locationX>
+        <locationY>413</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Inscricao</targetReference>
+        </connector>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue>Prezado(a) {!UserName}    Sua inscrição no modulo {!varOptModulo} do {!pklTreinamentosAtivos} foi realizada com sucesso!    Obrigado.</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>UserEmail</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Inscrição no modulo {!varOptModulo} do {!pklTreinamentosAtivos} </stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <assignments>
-        <description>Atribui o valor do treinamento</description>
-        <name>attIdTreinamentoLWC</name>
-        <label>Atribuir ID Treinamento LWC</label>
-        <locationX>448</locationX>
-        <locationY>488</locationY>
+        <name>Set_ID_Treinamento</name>
+        <label>Set ID Treinamento</label>
+        <locationX>615</locationX>
+        <locationY>279</locationY>
         <assignmentItems>
-            <assignToReference>varIdTreinamentoLwc</assignToReference>
+            <assignToReference>varIdTreinamento</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>varIdTreinamentoSelecionado.Id</elementReference>
+                <elementReference>pklTreinamentosAtivos</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>getAccount</targetReference>
+            <targetReference>Screen_Modulo</targetReference>
         </connector>
     </assignments>
     <decisions>
-        <name>ifModulosTreinamento</name>
+        <name>iFTemModulosTreinamento</name>
         <label>Verifica se tem modulos no treinamento</label>
-        <locationX>440</locationX>
-        <locationY>252</locationY>
+        <locationX>608</locationX>
+        <locationY>64</locationY>
         <defaultConnector>
             <targetReference>Screen_SemModulo</targetReference>
         </defaultConnector>
@@ -30,16 +58,41 @@
             <name>Tem_modulos_no_treinamento</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>getRecModulosDoTreinamento</leftValueReference>
+                <leftValueReference>GetModulos</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>attIdTreinamentoLWC</targetReference>
+                <targetReference>Set_ID_Treinamento</targetReference>
             </connector>
             <label>Tem modulos no treinamento</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>IFUsuarioCadastrado</name>
+        <label>Verifica se o usuário já está cadastrado</label>
+        <locationX>330</locationX>
+        <locationY>414</locationY>
+        <defaultConnector>
+            <targetReference>Insert_Inscricao</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Realizar inscrição</defaultConnectorLabel>
+        <rules>
+            <name>Usuario_ja_cadastrado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>getInscricao</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Screen_JaInscrito</targetReference>
+            </connector>
+            <label>Usuario já cadastrado</label>
         </rules>
     </decisions>
     <description>Fluxo para inscrição dos usuários nos módulos dos treinamentos</description>
@@ -57,13 +110,24 @@
         </filters>
         <object>Treinamento__c</object>
         <outputAssignments>
-            <assignToReference>varIdTreinamentoSelecionado.Id</assignToReference>
+            <assignToReference>varIdTreinamento</assignToReference>
             <field>Id</field>
         </outputAssignments>
         <sortField>Name</sortField>
         <sortOrder>Asc</sortOrder>
         <valueField>Id</valueField>
     </dynamicChoiceSets>
+    <formulas>
+        <name>UserEmail</name>
+        <dataType>String</dataType>
+        <expression>{!$User.Email}</expression>
+    </formulas>
+    <formulas>
+        <description>Verifica o ID do usuário</description>
+        <name>UserId</name>
+        <dataType>String</dataType>
+        <expression>{!$User.Id}</expression>
+    </formulas>
     <formulas>
         <description>Exibe o nome do usuário</description>
         <name>UserName</name>
@@ -85,55 +149,162 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <description>Insere a inscrição do usuário</description>
+        <name>Insert_Inscricao</name>
+        <label>Insert Inscrição</label>
+        <locationX>561</locationX>
+        <locationY>414</locationY>
+        <connector>
+            <targetReference>Enviar_Email</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>TreinamentoModuloId__c</field>
+            <value>
+                <elementReference>varIdTreinamentoModulo.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>UserId__c</field>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Inscricao__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
-        <name>getAccount</name>
-        <label>Get Account</label>
-        <locationX>864</locationX>
-        <locationY>102</locationY>
+        <description>Seleciona o registro da inscrição conforme usuário e Id do treinamento</description>
+        <name>getInscricao</name>
+        <label>Get Inscrição</label>
+        <locationX>153</locationX>
+        <locationY>507</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Screen_Modulo</targetReference>
+            <targetReference>IFUsuarioCadastrado</targetReference>
         </connector>
-        <object>Account</object>
-        <outputReference>varAccountList</outputReference>
+        <filters>
+            <field>TreinamentoModuloId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varIdTreinamentoModulo.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>UserId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>UserId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Inscricao__c</object>
         <queriedFields>Id</queriedFields>
-        <queriedFields>Name</queriedFields>
-        <queriedFields>Phone</queriedFields>
-        <queriedFields>Industry</queriedFields>
-        <sortField>Name</sortField>
-        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
-        <name>getRecModulosDoTreinamento</name>
-        <label>Carrega os módulos do treinamento</label>
+        <description>Carrega os Módulos do treinamento selecionado</description>
+        <name>GetModulos</name>
+        <label>Get Modulos</label>
         <locationX>447</locationX>
         <locationY>61</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>ifModulosTreinamento</targetReference>
+            <targetReference>iFTemModulosTreinamento</targetReference>
         </connector>
         <filters>
             <field>TreinamentoId__c</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>varIdTreinamentoSelecionado.Id</elementReference>
+                <elementReference>varIdTreinamento</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>Treinamento_Modulo__c</object>
+        <queriedFields>Id</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <description>Seleciona o ID do treinamento módulo, para realizar a inclusão do usuário</description>
+        <name>getTreinamentoModuloId</name>
+        <label>Get Treinamento Modulo ID</label>
+        <locationX>153</locationX>
+        <locationY>279</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>getInscricao</targetReference>
+        </connector>
+        <filters>
+            <field>Ativo__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ModuloId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varIdModulo</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>TreinamentoId__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varIdTreinamento</elementReference>
+            </value>
+        </filters>
+        <object>Treinamento_Modulo__c</object>
+        <outputReference>varIdTreinamentoModulo</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
     <screens>
-        <name>Informaccoes_Selecionadas</name>
-        <label>Informacões Selecionadas</label>
-        <locationX>870</locationX>
-        <locationY>403</locationY>
+        <name>Inscricao</name>
+        <label>Inscrição</label>
+        <locationX>879</locationX>
+        <locationY>414</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>lblIncricao</name>
+            <fieldText>&lt;p&gt;Prezado(a)&amp;nbsp;&lt;b&gt;{!UserName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Sua inscrição no &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;modulo&amp;nbsp;&lt;/span&gt;&lt;b style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;{!varOptModulo}&lt;/b&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt; do &lt;/span&gt;&lt;b&gt;{!pklTreinamentosAtivos}&lt;/b&gt;&amp;nbsp;foi realizada com sucesso!&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Obrigado.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_Confirmacao</name>
+        <label>Confirmação</label>
+        <locationX>310</locationX>
+        <locationY>279</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>getTreinamentoModuloId</targetReference>
+        </connector>
         <fields>
             <name>lblResultados</name>
-            <fieldText>&lt;p&gt;{!varSelectedIds}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Prezado(a)  &lt;b&gt;{!UserName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Para confirmar sua inscrição no treinamento &lt;b&gt;{!pklTreinamentosAtivos}&lt;/b&gt; e modulo &lt;b style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;{!varOptModulo}&lt;/b&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;, avance para o proximo passo.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;Caso queira alterar, basta retornar ao passo anterior.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_JaInscrito</name>
+        <label>Usuario já Inscrito</label>
+        <locationX>338</locationX>
+        <locationY>638</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>lblJaIncrito</name>
+            <fieldText>&lt;p&gt;Prezado(a)  &lt;b&gt;{!UserName}&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Vocé já está inscrito no treinamento &lt;b&gt;{!pklTreinamentosAtivos}&lt;/b&gt; e modulo &lt;b style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;{!varOptModulo}&lt;/b&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;, por isso não será possível se inscrever novamente.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;Obrigado.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -142,44 +313,59 @@
     <screens>
         <name>Screen_Modulo</name>
         <label>Modulo</label>
-        <locationX>867</locationX>
-        <locationY>256</locationY>
-        <allowBack>true</allowBack>
+        <locationX>456</locationX>
+        <locationY>279</locationY>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Informaccoes_Selecionadas</targetReference>
+            <targetReference>Screen_Confirmacao</targetReference>
         </connector>
-        <fields>
-            <name>lblDisplayLwc</name>
-            <fieldText>&lt;p&gt;ID {!varIdTreinamentoLwc}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
         <fields>
             <name>lwcModulo</name>
             <extensionName>c:moduloFlowScreen</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>Accs</name>
+                <name>varIdModuloLwc</name>
                 <value>
-                    <elementReference>varAccountList</elementReference>
+                    <elementReference>varIdModulo</elementReference>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>selectedAccsString</name>
+                <name>varIdTreinamentoLwc</name>
                 <value>
-                    <elementReference>varSelectedIds</elementReference>
+                    <elementReference>varIdTreinamento</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>varOptionModuloLwc</name>
+                <value>
+                    <elementReference>varOptModulo</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>varAccountList</assignToReference>
-                <name>Accs</name>
+                <assignToReference>varIdModulo</assignToReference>
+                <name>varIdModuloLwc</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>varSelectedIds</assignToReference>
-                <name>selectedAccsString</name>
+                <assignToReference>varIdTreinamento</assignToReference>
+                <name>varIdTreinamentoLwc</name>
             </outputParameters>
+            <outputParameters>
+                <assignToReference>varOptModulo</assignToReference>
+                <name>varOptionModuloLwc</name>
+            </outputParameters>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>varIdTreinamento</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -187,8 +373,8 @@
     <screens>
         <name>Screen_SemModulo</name>
         <label>Não tem modulos</label>
-        <locationX>225</locationX>
-        <locationY>252</locationY>
+        <locationX>872</locationX>
+        <locationY>68</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -210,7 +396,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>getRecModulosDoTreinamento</targetReference>
+            <targetReference>GetModulos</targetReference>
         </connector>
         <fields>
             <name>lblDisplay</name>
@@ -235,22 +421,29 @@
             <targetReference>Screen_Treinamento</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
-        <name>varAccountList</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>true</isInput>
-        <isOutput>true</isOutput>
-        <objectType>Account</objectType>
-    </variables>
-    <variables>
-        <description>Variável utilizada para carregar os módulos no componente LWC</description>
-        <name>varIdTreinamentoLwc</name>
+        <name>varIdModulo</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Armazena o id do treinamento selecionado</description>
+        <name>varIdTreinamento</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varIdTreinamentoModulo</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Treinamento_Modulo__c</objectType>
     </variables>
     <variables>
         <description>Id do treinamento selecionado</description>
@@ -262,7 +455,7 @@
         <objectType>Treinamento__c</objectType>
     </variables>
     <variables>
-        <name>varSelectedIds</name>
+        <name>varOptModulo</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>

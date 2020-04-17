@@ -1,22 +1,19 @@
-import { LightningElement, api,wire, track } from 'lwc';
-import getTreinamento from '@salesforce/apex/TreinamentoController.getTreinamento';
+// Realiza as importações da plataforma
+import { LightningElement, api,wire} from 'lwc';
+import getModuloAtivoRelacionado from '@salesforce/apex/ModuloController.getModuloAtivoRelacionado';
 
 export default class ModuloFlowScreen extends LightningElement {
-    @api varIdTreinamentoLwc;
-    @api selectedAccs = [];
-    @api selectedAccsString;
-    @api Accs = [];
+    // Parâmetros explicitamente declarados no arquivo de meta.xml
+    // nas tags de targetConfig
+    @api varIdTreinamentoLwc; 
+    @api varIdModuloLwc;
+    @api varOptionModuloLwc;
+
+    // objeto para carga dos resultados através do wire
     objResults = [];
 
-    @track objFiltro = {
-        Id: '',
-        Name: '',
-        Descricao: ''
-    };
-
-    @track strSearch = JSON.stringify(this.objFiltro);
-
-    @wire(getTreinamento, { strFiltro: '$strSearch' } ) // 
+    // Realiza a chamada do metodo da classe
+    @wire(getModuloAtivoRelacionado, { Id: '',  TreinamentoId: '$varIdTreinamentoLwc', Name: '',  Descricao: '' , Ativo:'' } ) 
     wiredResult(data,error) { 
         if(data){
             this.objResults= data;
@@ -25,39 +22,46 @@ export default class ModuloFlowScreen extends LightningElement {
         }
     } 
 
+    // Carrega o radio group
     get radioOption()  {
         let vlrReturn=[];
-        // Tenho que fazer a tela entender esse cara para carregar os mudolos
-        // criar uma nova classe de modulos e mostrar tudo na tela no lugar dos treinamentos
-        console.log('varIdTreinamentoLwc - ' + this.varIdTreinamentoLwc);
-
         if (this.objResults.data != undefined){
              for( var i = 0; i < this.objResults.data.length; i++) {
                  vlrReturn.push({
-                    label: this.objResults.data[i].Name,
-                    value: this.objResults.data[i].Id
+                    label: this.objResults.data[i].ModuloId__r.Name,
+                    value: this.objResults.data[i].ModuloId__r.Id
                 })
             }
         } 
         return vlrReturn;
-      }
-
-    handleCheck(event) {
-        if(!this.selectedAccs.includes(event.currentTarget.name))
-            this.selectedAccs.push(event.currentTarget.name);
-        else {
-            for(let i = 0; i < this.selectedAccs.length; i++) {
-                if(event.currentTarget.name === this.selectedAccs[i])
-                this.selectedAccs.splice(i, 1);
-            }
-        }
-        
-        this.selectedAccsString = JSON.stringify(this.selectedAccs);
-        
     }
 
-    selectRadio(event) {
-        this.selectedAccsString = event.detail.value;
+    // Altera o valor conforme seleção do usuário
+    handleChange(event) {
+        this.varIdModuloLwc = event.detail.value;
+        var rdoList = this.radioOption;
+        var rdoSelected  = this.varIdModuloLwc;
+        var getLabel ='';
+        rdoList.map(function (e) {
+            if (e.value == rdoSelected) {
+                getLabel = e.label;
+                return e.label;
+            }
+        });
+        this.varOptionModuloLwc =getLabel;
+    }
+
+    // Valida a tela antes de ir par ao proximo
+    @api
+    validate() {
+        if(this.varIdModuloLwc != null) { 
+            return { isValid: true }; 
+        } else { 
+            return { 
+                isValid: false, 
+                errorMessage: 'Selecione um modulo na lista!' 
+             }; 
+         }
     }
 
 }
