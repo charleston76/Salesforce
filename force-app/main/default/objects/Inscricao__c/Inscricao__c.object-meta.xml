@@ -163,7 +163,9 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Inscrições</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts>
+        <excludedStandardButtons>New</excludedStandardButtons>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

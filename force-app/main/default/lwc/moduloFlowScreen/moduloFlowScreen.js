@@ -8,10 +8,8 @@ export default class ModuloFlowScreen extends LightningElement {
     @api varIdTreinamentoLwc; 
     @api varIdModuloLwc;
     @api varOptionModuloLwc;
-
     // objeto para carga dos resultados através do wire
     objResults = [];
-
     // Realiza a chamada do metodo da classe
     @wire(getModuloAtivoRelacionado, { Id: '',  TreinamentoId: '$varIdTreinamentoLwc', Name: '',  Descricao: '' , Ativo:'' } ) 
     wiredResult(data,error) { 
@@ -21,7 +19,6 @@ export default class ModuloFlowScreen extends LightningElement {
             console.log('error -->'+error);   
         }
     } 
-
     // Carrega o radio group
     get radioOption()  {
         let vlrReturn=[];
@@ -35,7 +32,18 @@ export default class ModuloFlowScreen extends LightningElement {
         } 
         return vlrReturn;
     }
-
+    // Valida a tela antes de ir para o proximo passo
+    @api
+    validate() {
+        if(this.varIdModuloLwc != null) { 
+            return { isValid: true }; 
+        } else { 
+            return { 
+                isValid: false, 
+                errorMessage: 'Selecione um modulo na lista!' 
+             }; 
+         }
+    }
     // Altera o valor conforme seleção do usuário
     handleChange(event) {
         this.varIdModuloLwc = event.detail.value;
@@ -50,18 +58,4 @@ export default class ModuloFlowScreen extends LightningElement {
         });
         this.varOptionModuloLwc =getLabel;
     }
-
-    // Valida a tela antes de ir par ao proximo
-    @api
-    validate() {
-        if(this.varIdModuloLwc != null) { 
-            return { isValid: true }; 
-        } else { 
-            return { 
-                isValid: false, 
-                errorMessage: 'Selecione um modulo na lista!' 
-             }; 
-         }
-    }
-
 }

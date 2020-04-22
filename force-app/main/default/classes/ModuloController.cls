@@ -8,18 +8,17 @@ public with sharing class ModuloController {
         List<Treinamento_Modulo__c> objReturn = new List<Treinamento_Modulo__c>();
 
         string strWhere = '';        
+        // Carrega a query de resultado
         string strQuery = getRegularQuery();
+        // Converte o filtro de modo a utilizar como objeto
         String strFiltro = setJsonFilter(Id, TreinamentoId, Name, Descricao, Ativo);
-System.debug('strFiltro.json >>>>>>>>>>>>>> ' + strFiltro);
         // Remove possiveis injections e converte em objeto
         FiltroModulo objFilter = removeInjectionAndConvert(strFiltro);
         // Atribui os filtros recebidos
         strWhere = getFiltroModulo(objFilter,true);
-
         // Verifica se tem alguma condição no where
         strQuery +=  (strWhere !='') ? strWhere : '';
         strQuery +=' ORDER BY ModuloId__r.Name ';
-System.debug('strQuery >>>>>>>>>>>>>> ' + strQuery);
         // Executa o método na base
         objReturn = Database.query(strQuery);
         // Retorna o resultado
