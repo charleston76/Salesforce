@@ -3,6 +3,7 @@
     "edition": "Developer",
     "features": [
         "ServiceCloud",
+        "LightningServiceConsole",
         "Knowledge",
         "Communities",
         "Sites"
@@ -21,6 +22,10 @@
         },
         "mobileSettings":{
             "enableS1EncryptedStoragePref2": false
+        },
+        "knowledgeSettings" : {
+            "enableKnowledge": true
         }
-    }
+    },
+    "hasSampleData": true 
 }
