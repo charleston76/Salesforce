@@ -143,12 +143,12 @@
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Exemplo:
-Flow builder
-Process builder
-Apex code
-Aura components
-LWC components</description>
+    <description>Objeto de treinamentos realizados
+
+Exemplos
+Desenvolvimento declarativo
+Desenvolvimento back-end
+Desenvolvimento front-end</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -159,17 +159,58 @@ LWC components</description>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Modulo</label>
+    <label>Treinamento</label>
     <nameField>
-        <label>Modulo Name</label>
+        <label>Treinamento Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Modulos</pluralLabel>
+    <pluralLabel>Treinamentos</pluralLabel>
     <searchLayouts>
         <searchResultsAdditionalFields>Ativo__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Descricao__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
+    <fields>
+        <fullName>Ativo__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Define o status do treinamento</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe status do treinamento</inlineHelpText>
+        <label>Ativo</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Descricao__c</fullName>
+        <description>Descrição longa do treinamento</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe a descrição do treinamento</inlineHelpText>
+        <label>Descrição</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Instrutor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Instrutor do curso</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe o nome instrutor do curso</inlineHelpText>
+        <label>Instrutor</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Treinamentos</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
 </CustomObject>
