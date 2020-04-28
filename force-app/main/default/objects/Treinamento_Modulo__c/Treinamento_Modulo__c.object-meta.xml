@@ -154,7 +154,7 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ControlledByParent</externalSharingModel>
-    <gender>Masculine</gender>
+    <gender></gender>
     <label>Treinamento Modulo</label>
     <nameField>
         <displayFormat>trm-{00000}</displayFormat>

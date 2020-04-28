@@ -172,4 +172,45 @@ LWC components</description>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
+    <fields>
+        <fullName>Ativo__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Define o status do modulo</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe status do modulo</inlineHelpText>
+        <label>Ativo</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Carga_Horaria__c</fullName>
+        <description>Carga horaria prevista</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe a carga horaria prevista</inlineHelpText>
+        <label>Carga Horaria</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Descricao__c</fullName>
+        <description>Descrição do modulo</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe a descrição do modulo</inlineHelpText>
+        <label>Descrição</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
 </CustomObject>

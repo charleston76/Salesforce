@@ -143,12 +143,7 @@
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Exemplo:
-Flow builder
-Process builder
-Apex code
-Aura components
-LWC components</description>
+    <description>Registra as inscrições nos treinamentos</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -159,17 +154,71 @@ LWC components</description>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Modulo</label>
+    <label>Inscrição</label>
     <nameField>
-        <label>Modulo Name</label>
+        <displayFormat>ins-{00000}</displayFormat>
+        <label>Inscricao Name</label>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Modulos</pluralLabel>
+    <pluralLabel>Inscrições</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields>Ativo__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Descricao__c</searchResultsAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
+    <fields>
+        <fullName>Ativo__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Define o status da inscrição</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe o status da inscrição</inlineHelpText>
+        <label>Ativo</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TreinamentoModuloId__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Treinamento/Modulo inscrito</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defina seu treinamento/modulo</inlineHelpText>
+        <label>Treinamento Modulo</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.Ativo__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Treinamento_Modulo__c</referenceTo>
+        <relationshipLabel>Inscrições</relationshipLabel>
+        <relationshipName>Inscricoes</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UserId__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Usuário inscrito</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defina seu nome de usuário</inlineHelpText>
+        <label>Inscrito</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Inscricoes</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
 </CustomObject>

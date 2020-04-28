@@ -143,12 +143,7 @@
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Exemplo:
-Flow builder
-Process builder
-Apex code
-Aura components
-LWC components</description>
+    <description>Treinamentos e Modulos</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -158,18 +153,87 @@ LWC components</description>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <label>Modulo</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <gender/>
+    <label>Treinamento Modulo</label>
     <nameField>
-        <label>Modulo Name</label>
+        <displayFormat>trm-{00000}</displayFormat>
+        <label>Treinamento Modulo Name</label>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Modulos</pluralLabel>
+    <pluralLabel>Treinamento Modulos</pluralLabel>
     <searchLayouts>
+        <searchResultsAdditionalFields>TreinamentoId__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ModuloId__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Ativo__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Descricao__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
+    <fields>
+        <fullName>Ativo__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Define o status da junção</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Informe o status desta junção</inlineHelpText>
+        <label>Ativo</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ModuloId__c</fullName>
+        <description>Modulo</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defina o módulo a ser vinculado</inlineHelpText>
+        <label>Modulo</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Modulo__c.Ativo__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Modulo__c</referenceTo>
+        <relationshipLabel>Treinamento Modulos</relationshipLabel>
+        <relationshipName>Treinamento_Modulos</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>TreinamentoId__c</fullName>
+        <description>Treinamento</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Defina o treinamento a ser vinculado</inlineHelpText>
+        <label>Treinamento</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Treinamento__c.Ativo__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Treinamento__c</referenceTo>
+        <relationshipLabel>Treinamento Modulos</relationshipLabel>
+        <relationshipName>Treinamento_Modulos</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
 </CustomObject>
