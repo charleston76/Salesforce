@@ -15,6 +15,7 @@
     <tabs>Treinamento__c</tabs>
     <tabs>Modulo__c</tabs>
     <tabs>Treinamento_Modulo__c</tabs>
+    <tabs>Inscricao_Customizada</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>TreinamentoApp_UtilityBar</utilityBar>
 </CustomApplication>
