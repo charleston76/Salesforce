@@ -164,6 +164,8 @@
     <pluralLabel>Inscrições</pluralLabel>
     <searchLayouts>
         <excludedStandardButtons>New</excludedStandardButtons>
+        <searchResultsAdditionalFields>Ativo__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UserId__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
