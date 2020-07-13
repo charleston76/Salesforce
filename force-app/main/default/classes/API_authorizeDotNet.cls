@@ -24,30 +24,29 @@ public with sharing class API_authorizeDotNet {
 
     // Realiza a chamada
     public static ResponseWrapper getCalloutAuthDotNet (RequestWrapper objImput) {
-        //reusable method for getting Authorize.net credentials
+        //Primeiro pega as credenciais
         getAuthNetCredenciais();
     
-        //Construct the request
+        //Instancia a request
         HttpRequest objRequest = new HttpRequest();
 
         // Este endpoint precisa estar configurado no remote site settings
+        // Se não dá erro
         objRequest.setEndpoint(API_ENDPOINT); 
         objRequest.setMethod('POST');
         
-        //build message
+        //Cria um map para a mensagem
         Map<string,string> strMapMessage = new map<String,String>();
         
-        //Default Fields
-        //See the authorize.net documentation
-        //for more information
+        //Campos do padrão definido na documentação do authorize.net documentation
         strMapMessage.put('x_login',API_LOGIN);
         strMapMessage.put('x_tran_key',API_TRANSKEY);  
         strMapMessage.put('x_version', '3.1');
         strMapMessage.put('x_delim_data', 'TRUE');
-        //specify delimiter character for response
+        //Delimitar do response
         strMapMessage.put('x_delim_char', ';');
         strMapMessage.put('x_relay_response', 'FALSE');  
-        //The type of transaction
+        //Tipo de transação
         strMapMessage.put('x_type', 'AUTH_CAPTURE');
         //Processing credit card
         strMapMessage.put('x_method', 'CC');
@@ -86,23 +85,24 @@ public with sharing class API_authorizeDotNet {
         strEncoded += 'endofdata';
         system.debug('TRACE: Encoded Message: \n\n' + strEncoded);
     
-        //set the body of the httprequest
+        //Define o body da request
         objRequest.setBody(strEncoded);
         
-        //send and collect response
+        //Envia e já pega a resposta
         Http objHttp = new Http();
-         string objResponse = objHttp.send(objRequest).getbody();
-         //debug response
-         system.debug(objResponse);
-         //split response by our delimiter
-           list<string> responses = objResponse.split(';');
-    
-           //use parsing methodto return response wrapper
-           ResponseWrapper parsedResponse = parseIntoResponseWrapper(responses);
+        string objResponse = objHttp.send(objRequest).getbody();
+        //debug
+        system.debug(objResponse);
+        
+        //Split pelo delimitador definido
+        list<string> responses = objResponse.split(';');
+        
+        //Faz o parse no objeto criado
+        ResponseWrapper objWrapper = parseIntoResponseWrapper(responses);
     
         //debug response wrapper
-        system.debug(parsedResponse);
-        return parsedResponse;
+        system.debug(objWrapper);
+        return objWrapper;
       } 
         
       
