@@ -10,7 +10,7 @@ Após clonar o repositório e fazer push na sua scratch, atribua o permission se
 Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki</a> deste repositório.
 
 ## Retrieve from TMP package
-    sfdx force:source:retrieve --manifest manifest/package-retrieveTmp.xml -u GjpQA
+    sfdx force:source:retrieve --manifest manifest/package-retrieveTmp.xml -u [Alias]
 
 ## Deployment
 ## clear the deployment folder, convert the files, and update de environment
@@ -18,7 +18,8 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
     sfdx force:source:convert -r force-app/ -d Deploy -x manifest/package-Deploy.xml
     --sfdx force:mdapi:deploy -u [ALIAS] -d Deploy/ -w 10
     --sfdx force:mdapi:deploy -u [ALIAS] -w10 -d ./Deploy --checkonly  -l RunSpecifiedTests -r Sistema_de_Reservas_APITest.cls
-    sfdx force:config:set defaultusername=charleston.santos@wingsit.com.br.sdrdevsfdx force:mdapi:deploy -u [ALIAS] -w15 -d ./Deploy
+    sfdx force:config:set defaultusername=user@test.com.br.sdrdev
+sfdx force:mdapi:deploy -u [ALIAS] -w15 -d ./Deploy
 
 # Destructive 
     # The package need to be in the destructive folder
