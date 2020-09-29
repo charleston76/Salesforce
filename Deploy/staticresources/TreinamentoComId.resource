@@ -1,3 +1,0 @@
-Id, Descricao__c
-Treinamento1,Desenvolvimento declarativo
-Treinamento2,Desenvolvimento backend

@@ -1,3 +1,0 @@
-TreinamentoId__c,ModuloId__c,Ativo__c
-Treinamento1,Modulo1,1
-Treinamento1,Modulo2,0

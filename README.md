@@ -17,8 +17,8 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
             sfdx force:auth:web:login -a [Alias] --setdefaultusername 
 
     If you don't wanna set the default user name, you can do that later:
+        sfdx force:config:set defaultusername=user@test.com.br.sdrdev
         sfdx force:config:set defaultdevhubusername=user@name.com
-
 
 ## Retrieve from TMP package
     sfdx force:source:retrieve --manifest manifest/package-retrieveTmp.xml -u [Alias]
@@ -29,24 +29,32 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
     sfdx force:source:convert -r force-app/ -d Deploy -x manifest/package-Deploy.xml
     --sfdx force:mdapi:deploy -u [ALIAS] -d Deploy/ -w 10
     --sfdx force:mdapi:deploy -u [ALIAS] -w10 -d ./Deploy --checkonly  -l RunSpecifiedTests -r Sistema_de_Reservas_APITest.cls
-    sfdx force:config:set defaultusername=user@test.com.br.sdrdev
-sfdx force:mdapi:deploy -u [ALIAS] -w15 -d ./Deploy
+    
+    sfdx force:mdapi:deploy -u myTrain -w15 -d ./Deploy
 
 # Destructive 
     # The package need to be in the destructive folder
     --sfdx force:mdapi:deploy -d destructive -g -w 10
 
 # For the SOAP API integration
-1 - Authentication endpoint: 
-    http://login.salesforce.com/Soap/c/49.0
+1 - Authentication 
+    Endpoint:   https://login.salesforce.com/services/Soap/c/49.0.
 
     Set the headers:
     1 - SOAPAction : -  (a dash)
         Content-Type : text/xml
-    2 - Use the body example SOAPAuthenticationAPI.txt
-        
+    2 - Body:   Integration\SOAP\SOAPAuthenticationAPI.txt
+
 2 - Query objects
+    Endpoint (sobjects): https://iteristesting-dev-ed.my.salesforce.com/services/Soap/c/7.0
     Set the headers:
     1 - SOAPAction : -  (a dash)
         Content-Type : text/xml
-    2 - Use the body example SOAPQueryAccount.txt
+    2 - Body:   Integration\SOAP\SOAPQueryAccount.txt
+
+3 - For custom webservices the endpoint is:
+    Endpoint:   https://iteristesting-dev-ed.my.salesforce.com/services/Soap/class/ClassName
+
+    Example:    https://iteristesting-dev-ed.my.salesforce.com/services/Soap/class/SOAP_IntegrationAccount
+
+    2 - Body:   Integration\SOAP\SOAPCustomWebService.txt
