@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>   
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+   xmlns:urn="urn:enterprise.soap.sforce.com">
+  <soapenv:Header>
+     <urn:SessionHeader>
+        <urn:sessionId>00D6g000000DoJv!ARwAQH2wMsKS42eXyzu2W0ya5aEZ0xC5n0BADVSNVKCazsJGjo6iRuKKF3YCvg336egCMcvZKoQDI3wGZ4Uf.1tywIbdDomi</urn:sessionId>
+     </urn:SessionHeader>
+  </soapenv:Header>
+  <soapenv:Body>
+     <urn:query>
+        <urn:queryString>SELECT id,AccountNumber,Name FROM Account </urn:queryString>
+     </urn:query>
+  </soapenv:Body>
+</soapenv:Envelope>
