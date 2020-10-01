@@ -28,7 +28,7 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
     rmdir /s/q Deploy
     sfdx force:source:convert -r force-app/ -d Deploy -x manifest/package-Deploy.xml
     --sfdx force:mdapi:deploy -u [ALIAS] -d Deploy/ -w 10
-    --sfdx force:mdapi:deploy -u [ALIAS] -w10 -d ./Deploy --checkonly  -l RunSpecifiedTests -r Sistema_de_Reservas_APITest.cls
+    --sfdx force:mdapi:deploy -u [ALIAS] -w10 -d ./Deploy --checkonly  -l RunSpecifiedTests -r ClasseName1,ClasseName2,ClasseNameN
     
     sfdx force:mdapi:deploy -u myTrain -w15 -d ./Deploy
 
