@@ -11,6 +11,7 @@
 		<members>InscricaoControllerOutroExemplo_Test</members>
 		<members>ModuloController</members>
 		<members>InscricaoController_Test</members>
+		<members>REST_IntegrationTreinamentoService</members>
 		<members>SOAP_IntegrationAccount</members>
 		<members>TestDataFactory</members>
 		<members>TreinamentoController</members>
