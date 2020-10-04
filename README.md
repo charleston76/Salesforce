@@ -36,6 +36,20 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
     # The package need to be in the destructive folder
     --sfdx force:mdapi:deploy -d destructive -g -w 10
 
+# For the REST API integration
+1 - Create a connected APP
+2 - Get the access token autenticaction (post)
+    RESTAuthAuthentication.txt
+        grant_type=password
+        client_id=Consumer Key
+        client_secret=Consumer Secret
+        username=USER_NAME
+        password=PASSWORD+SECURITY_TOKEN
+    https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&username=USER_NAME&password=PASSWORD+SECURITY_TOKEN
+
+3 - Query objects
+
+
 # For the SOAP API integration
 1 - Authentication 
     Endpoint:   https://login.salesforce.com/services/Soap/c/49.0.

@@ -1,0 +1,51 @@
+Headers:
+    Authorization: Bearer +ACCESSS_TOKEN
+
+
+Example to post Account:
+   https://ORGANIZATION/services/data/v49.0/sobjects/Account
+   https://ORGANIZATION.salesforce.com/services/data/v49.0/sobjects/Account
+   
+   XML example
+      <Account>
+         <Name>Account XML</Name>
+         <Phone>6789098888</Phone>
+         <Site>sfdxtraining.com.br</Site>
+      </Account>
+   Returns like that:
+      {
+         "id": "0016g00000o3ju2AAA",
+         "success": true,
+         "errors": []
+      }
+
+   JSON Example
+      {
+         "Name": "Treinamento Account",
+         "Site": "sfdxtraining.com.br",
+         "Phone": "7777778888"
+      }
+
+
+   Returns like that:
+      {
+         "id": "0016g00000o3jOkAAI",
+         "success": true,
+         "errors": []
+      }
+
+
+Example to post Treinamento:
+   https://ORGANIZATION.salesforce.com/services/data/v49.0/sobjects/Treinamento__c
+
+   {
+      "Name": "Treinamento REST",
+      "Descricao__c": "Treinamento inserido via REST integration"
+   }
+
+  And get a return like that:
+   {
+      "id": "a0O6g000003fuNCEAY",
+      "success": true,
+      "errors": []
+   }
