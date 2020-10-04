@@ -5,7 +5,7 @@ client_secret=Consumer Secret
 username=USER_NAME
 password=PASSWORD+SECURITY_TOKEN
 
-You ask like that
+You ask like that (post)
 https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&username=USER_NAME&password=PASSWORD+SECURITY_TOKEN
 
 And get a return like that:
@@ -13,7 +13,7 @@ And get a return like that:
 {
     "access_token": "00D6g000000DoJv!ARwAQHihjq.w9FsQqMSprga2z4wLuL6FKWgjGPAt0yeEUw3bXpDVDFsdON__sx1uP.HEHwHO15cwzXv6WFwJ4kv5wDXmCeLy",
     "instance_url": "https://ENVIRONMENT.my.salesforce.com",
-    "id": "https://login.salesforce.com/id/00D6g000000DoJvEAK/0056g000000VFFJAA4",
+    "id": "https://login.salesforce.com/id/00X9X000000XxXxXXX/0099g000000XXXXXX9",
     "token_type": "Bearer",
     "issued_at": "1601553315625",
     "signature": "lYdm/94Rg73ntRYe8HmId4a4P410zRIo+hc/IOqXd5k="

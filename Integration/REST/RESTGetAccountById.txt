@@ -1,0 +1,137 @@
+Headers:
+    Authorization: Bearer +ACCESSS_TOKEN
+
+
+
+Example to get account:
+    https://na139.salesforce.com/services/data/v49.0/sobjects/Account/0014W000021KprsQAC
+    https://ORGANIZATION.my.salesforce.com/services/data/v49.0/sobjects/Account/0016g000003A2cUAAS
+
+
+Other objetcs
+    https://na139.salesforce.com/services/data/v49.0/sobjects/Student__c/a004W00000aDeOYQA0
+    https://na139.salesforce.com/services/data/v49.0/sobjects/School__c/a014W00000tqNZoQAM
+    https://ORGANIZATION.my.salesforce.com/services/data/v49.0/sobjects/Treinamento__c/a0O6g000003fuJKEAY
+
+
+And get a return like that:
+    Treinamento__c:
+        {
+            "attributes": {
+                "type": "Treinamento__c",
+                "url": "/services/data/v49.0/sobjects/Treinamento__c/a0O6g000003fuJKEAY"
+            },
+            "Id": "a0O6g000003fuJKEAY",
+            "OwnerId": "0056g000000VFFJAA4",
+            "IsDeleted": false,
+            "Name": "Treinamento APEX",
+            "CurrencyIsoCode": "USD",
+            "CreatedDate": "2020-10-03T22:45:05.000+0000",
+            "CreatedById": "0056g000000VFFJAA4",
+            "LastModifiedDate": "2020-10-03T22:45:05.000+0000",
+            "LastModifiedById": "0056g000000VFFJAA4",
+            "SystemModstamp": "2020-10-03T22:45:05.000+0000",
+            "LastActivityDate": null,
+            "LastViewedDate": "2020-10-03T22:45:08.000+0000",
+            "LastReferencedDate": "2020-10-03T22:45:08.000+0000",
+            "Ativo__c": true,
+            "Descricao__c": "Treinamento em APEX",
+            "Instrutor__c": null
+        }
+
+
+    Account:
+        {
+            "attributes": {
+                "type": "Account",
+                "url": "/services/data/v49.0/sobjects/Account/0016g000003A2cUAAS"
+            },
+            "Id": "0016g000003A2cUAAS",
+            "IsDeleted": false,
+            "MasterRecordId": null,
+            "Name": "GenePoint",
+            "Type": "Customer - Channel",
+            "ParentId": null,
+            "BillingStreet": "345 Shoreline Park\nMountain View, CA 94043\nUSA",
+            "BillingCity": "Mountain View",
+            "BillingState": "CA",
+            "BillingPostalCode": null,
+            "BillingCountry": null,
+            "BillingLatitude": null,
+            "BillingLongitude": null,
+            "BillingGeocodeAccuracy": null,
+            "BillingAddress": {
+                "city": "Mountain View",
+                "country": null,
+                "geocodeAccuracy": null,
+                "latitude": null,
+                "longitude": null,
+                "postalCode": null,
+                "state": "CA",
+                "street": "345 Shoreline Park\nMountain View, CA 94043\nUSA"
+            },
+            "ShippingStreet": "345 Shoreline Park\nMountain View, CA 94043\nUSA",
+            "ShippingCity": null,
+            "ShippingState": null,
+            "ShippingPostalCode": null,
+            "ShippingCountry": null,
+            "ShippingLatitude": null,
+            "ShippingLongitude": null,
+            "ShippingGeocodeAccuracy": null,
+            "ShippingAddress": {
+                "city": null,
+                "country": null,
+                "geocodeAccuracy": null,
+                "latitude": null,
+                "longitude": null,
+                "postalCode": null,
+                "state": null,
+                "street": "345 Shoreline Park\nMountain View, CA 94043\nUSA"
+            },
+            "Phone": "(650) 867-3450",
+            "Fax": "(650) 867-9895",
+            "AccountNumber": "CC978213",
+            "Website": "www.genepoint.com",
+            "PhotoUrl": "/services/images/photo/0016g000003A2cUAAS",
+            "Sic": "3712",
+            "Industry": "Biotechnology",
+            "AnnualRevenue": 3.0E7,
+            "NumberOfEmployees": 265,
+            "Ownership": "Private",
+            "TickerSymbol": null,
+            "Description": "Genomics company engaged in mapping and sequencing of the human genome and developing gene-based drugs",
+            "Rating": "Cold",
+            "Site": null,
+            "CurrencyIsoCode": "BRL",
+            "OwnerId": "0056g000000VFFJAA4",
+            "CreatedDate": "2019-11-05T05:52:54.000+0000",
+            "CreatedById": "0056g000000VFFJAA4",
+            "LastModifiedDate": "2019-11-05T05:52:54.000+0000",
+            "LastModifiedById": "0056g000000VFFJAA4",
+            "SystemModstamp": "2020-07-14T21:58:42.000+0000",
+            "LastActivityDate": null,
+            "LastViewedDate": "2020-07-09T14:27:30.000+0000",
+            "LastReferencedDate": "2020-07-09T14:27:30.000+0000",
+            "IsPartner": false,
+            "IsCustomerPortal": false,
+            "ChannelProgramName": null,
+            "ChannelProgramLevelName": null,
+            "Jigsaw": null,
+            "JigsawCompanyId": null,
+            "CleanStatus": "Pending",
+            "AccountSource": null,
+            "DunsNumber": null,
+            "Tradestyle": null,
+            "NaicsCode": null,
+            "NaicsDesc": null,
+            "YearStarted": null,
+            "SicDesc": null,
+            "DandbCompanyId": null,
+            "CustomerPriority__c": "Low",
+            "SLA__c": "Bronze",
+            "Active__c": "Yes",
+            "NumberofLocations__c": 1.0,
+            "UpsellOpportunity__c": "Yes",
+            "SLASerialNumber__c": "7324",
+            "SLAExpirationDate__c": "2020-06-01"
+        }
