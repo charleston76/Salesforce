@@ -5,7 +5,7 @@ Headers:
 
 Example to get custom record:
     https://na139.salesforce.com/services/apexrest/studentsInfo/a004W00000aDdMMQA0
-    https://iteristesting-dev-ed.my.salesforce.com/services/apexrest/TreinamentoService/a0O6g000003fuNCEAY
+    https://ORGANIZATION.my.salesforce.com/services/apexrest/TreinamentoService/a0O6g000003fuNCEAY
 
 
 And get a return like that:
