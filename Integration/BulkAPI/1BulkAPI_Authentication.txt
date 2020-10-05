@@ -1,0 +1,25 @@
+The first step to create the job, is get the authentication token
+
+client_id=Consumer Key
+client_secret=Consumer Secret
+username=USER_NAME
+password=PASSWORD+SECURITY_TOKEN
+
+
+https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9l2zHsylwlpSgIcB3xLoyEXmGh9_yRXHDTiUm02HBkBzyJ_vKsQRzYXhrrGTzgVcffWM9J0THSEZP2t3j&client_secret=54974578E7AA4DA6339AEF2D7078610BB68B202C12EC9FB73624FE83A77E5659
+&username=deepikaintegrationtutorial@mytutorialrack.com&password=password1230SvNHjKeCaiKKTXk38kKIOx18
+
+
+You do a post like that:
+
+https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=CLINET_ID&client_secret=CLIENT_SECRET&username=UserName@test.com&password=PASSWORD
+
+And get a return like that:
+{
+    "access_token": "XXX6g000000DXXX!ARwAQFaIsYD9IK3YV1iYdekFFNOyYEnA8QHxsK6Ab37F7ZNFXXXwgyLi7bpVL4I8Pa1YhwmSm5Y9dyRV2c9kjD3a78VgjXXX",
+    "instance_url": "https://ORGANIZATION.salesforce.com",
+    "id": "https://login.salesforce.com/id/XXX6g000000DoJvXXX/0056g000000VFFJXXX",
+    "token_type": "Bearer",
+    "issued_at": "1601861789115",
+    "signature": "VDlcw5dIaROMo1d5h3Du/+elDMQvE17ETvINW4oKPmw="
+}

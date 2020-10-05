@@ -1,0 +1,47 @@
+With the access token got (1BulkAPI_Authentication.txt) you need do another post to create the job specifying the
+Header:
+	X-SFDC-Session: ACCESS_TOKEN got in the step one.
+
+End point:
+	https://ORGANIZATION.salesforce.com/services/async/49.0/job
+
+Body:
+	operation: insert/ delete/ update
+	object: Any sObject
+	contentType: XML / CSV
+
+	<?xml version="1.0" encoding="UTF-8"?> 
+	<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload"> 
+		<operation>insert</operation> 
+		<object>Account</object> 
+		<contentType>XML</contentType> 
+	</jobInfo>
+
+
+The you get a return like that (and the job ID is the most important here):
+
+<?xml version="1.0" encoding="UTF-8"?>
+<jobInfo
+   xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+    <id>7506g00000Dn1yGAAR</id>
+    <operation>insert</operation>
+    <object>Account</object>
+    <createdById>0056g000000VFFJAA4</createdById>
+    <createdDate>2020-10-05T01:48:02.000Z</createdDate>
+    <systemModstamp>2020-10-05T01:48:02.000Z</systemModstamp>
+    <state>Open</state>
+    <concurrencyMode>Parallel</concurrencyMode>
+    <contentType>XML</contentType>
+    <numberBatchesQueued>0</numberBatchesQueued>
+    <numberBatchesInProgress>0</numberBatchesInProgress>
+    <numberBatchesCompleted>0</numberBatchesCompleted>
+    <numberBatchesFailed>0</numberBatchesFailed>
+    <numberBatchesTotal>0</numberBatchesTotal>
+    <numberRecordsProcessed>0</numberRecordsProcessed>
+    <numberRetries>0</numberRetries>
+    <apiVersion>49.0</apiVersion>
+    <numberRecordsFailed>0</numberRecordsFailed>
+    <totalProcessingTime>0</totalProcessingTime>
+    <apiActiveProcessingTime>0</apiActiveProcessingTime>
+    <apexProcessingTime>0</apexProcessingTime>
+</jobInfo>
