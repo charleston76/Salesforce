@@ -18,6 +18,14 @@ Body:
 	</jobInfo>
 
 
+An body example for Custom object:
+    <?xml version="1.0" encoding="UTF-8"?> 
+    <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload"> 
+        <operation>insert</operation> 
+        <object>Treinamento__c</object> 
+        <contentType>XML</contentType> 
+    </jobInfo>
+
 The you get a return like that (and the job ID is the most important here):
 
 <?xml version="1.0" encoding="UTF-8"?>

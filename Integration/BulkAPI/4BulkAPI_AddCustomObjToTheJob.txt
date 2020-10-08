@@ -1,0 +1,67 @@
+1 - Do the authentication (1BulkAPI_Authentication.txt)
+
+2 - Create the job (2BulkAPI_CreateJOB.txt)
+
+https://ORGANIZATION.salesforce.com/services/async/49.0/job
+
+<?xml version="1.0" encoding="UTF-8"?> 
+<jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload"> 
+	<operation>insert</operation> 
+	<object>Student__c</object> 
+	<contentType>XML</contentType> 
+</jobInfo>
+
+And get the job ID
+	<?xml version="1.0" encoding="UTF-8"?>
+	<jobInfo
+	xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+		<id>7506g00000EY917AAD</id>
+		<operation>insert</operation>
+		<object>Treinamento__c</object>
+		<createdById>0056g000000VFFJAA4</createdById>
+		<createdDate>2020-10-08T01:48:06.000Z</createdDate>
+		<systemModstamp>2020-10-08T01:48:06.000Z</systemModstamp>
+		<state>Open</state>
+		<concurrencyMode>Parallel</concurrencyMode>
+		<contentType>XML</contentType>
+		<numberBatchesQueued>0</numberBatchesQueued>
+		<numberBatchesInProgress>0</numberBatchesInProgress>
+		<numberBatchesCompleted>0</numberBatchesCompleted>
+		<numberBatchesFailed>0</numberBatchesFailed>
+		<numberBatchesTotal>0</numberBatchesTotal>
+		<numberRecordsProcessed>0</numberRecordsProcessed>
+		<numberRetries>0</numberRetries>
+		<apiVersion>49.0</apiVersion>
+		<numberRecordsFailed>0</numberRecordsFailed>
+		<totalProcessingTime>0</totalProcessingTime>
+		<apiActiveProcessingTime>0</apiActiveProcessingTime>
+		<apexProcessingTime>0</apexProcessingTime>
+	</jobInfo>
+
+3 - Add the batches to the job (3BulkAPI_AddBatchTotheBulkJob.txt)
+
+	https://iteristesting-dev-ed.my.salesforce.com/services/async/49.0/job/7506g00000EY917AAD/batch
+
+	Body example for custom Object
+<sObjects xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+	<sObject>
+		<type>Treinamento__c</type>
+		<Name>Bulk API 01</Name>
+		<Descricao__c>Treinamento Bulk API 01</Descricao__c>
+	</sObject>
+	<sObject>
+		<type>Treinamento__c</type>
+		<Name>Bulk API 02</Name>
+		<Descricao__c>Treinamento Bulk API 02</Descricao__c>
+	</sObject>
+	<sObject>
+		<type>Treinamento__c</type>
+		<Name>Bulk API 03</Name>
+		<Descricao__c>Treinamento Bulk API 03</Descricao__c>
+	</sObject>
+	<sObject>
+		<type>Treinamento__c</type>
+		<Name>Bulk API 04</Name>
+		<Descricao__c>Treinamento Bulk API 04</Descricao__c>
+	</sObject>
+</sObjects>
