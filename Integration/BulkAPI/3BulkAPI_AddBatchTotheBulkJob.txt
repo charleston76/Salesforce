@@ -1,0 +1,39 @@
+To add the batches, you grag the informations gotten till here (1BulkAPI_Authentication and 2BulkAPI_CreateJOB.txt), use almost
+the same URL used to create the job, but add the "JobID/batch"
+
+Header:
+	X-SFDC-Session: ACCESS_TOKEN got in the step one.
+
+  To import as a CSV, besides the header before, you need define the content type header:
+    Content-Type: text/csv
+
+End point:
+	https://ORGANIZATION.salesforce.com/services/async/49.0/job/7504W00000K1fb6QAB/batch
+
+Body:
+
+  <sObjects xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+      <sObject>
+          <type>Account</type>
+          <Name>Dummy 101</Name>
+      </sObject>
+        <sObject>
+          <type>Account</type>
+          <Name>Dummy 102</Name>
+      </sObject>
+        <sObject>
+          <type>Account</type>
+          <Name>Dummy 103</Name>
+      </sObject>
+        <sObject>
+          <type>Account</type>
+          <Name>Dummy 104</Name>
+      </sObject>
+  </sObjects>
+
+  You also can upload a file using the "binary" option and selecting the file do you want
+
+Since the execution will be done assychronously, you can check the resul in the Bul Data Load Jobs:
+  SETUP > Bulk Data Load Jobs
+
+  In this UI you can close or abort the job

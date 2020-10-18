@@ -36,6 +36,19 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
     # The package need to be in the destructive folder
     --sfdx force:mdapi:deploy -d destructive -g -w 10
 
+
+# For the BULK API integration
+1 - Create a connected APP
+2 - Do the authentication (1BulkAPI_Authentication.txt)
+    client_id=Consumer Key
+    client_secret=Consumer Secret
+    username=USER_NAME
+    password=PASSWORD+SECURITY_TOKEN
+3 - Create the Job and get the jobId back (2BulkAPI_CreateJOB.txt)
+
+4 - You can do the same steps for other objects also (4BulkAPI_AddCustomObjToTheJob.txt)
+
+
 # For the REST API integration
 1 - Create a connected APP
 2 - Get the access token autenticaction (post)
@@ -47,7 +60,7 @@ Mais detalhes no <a href="https://github.com/charleston76/Salesforce/wiki">Wiki<
         password=PASSWORD+SECURITY_TOKEN
     https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&username=USER_NAME&password=PASSWORD+SECURITY_TOKEN
 
-3 - Query objects
+3 - Query objects, or post, patch, etc
 
 
 # For the SOAP API integration
