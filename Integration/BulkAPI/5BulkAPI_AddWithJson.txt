@@ -1,0 +1,73 @@
+# 1 
+    METHOD: POST
+    URI: /services/data/v46.0/jobs/ingest/
+
+    Headers:
+    Content-Type: application/json; charset=UTF-8
+    Accept: application/json
+
+    Body:
+    {
+        "object" : "Account",
+        "contentType" : "CSV",
+        "operation" : "insert",
+        "lineEnding": "CRLF"
+    }
+
+    Response: 
+    { 
+        *"id"** : "750c000000Atm7AAAR",* 
+        "operation" : "insert", 
+        "object" : "Account", 
+        "createdById" : "0056g000000L5VzAAK", 
+        "createdDate" : "2019-11-23T21:42:53.000+0000", 
+        "systemModstamp" : "2019-11-23T21:42:53.000+0000", 
+        "state" : "Open", 
+        "concurrencyMode" : "Parallel", 
+        "contentType" : "CSV", 
+        "apiVersion" : 46.0, 
+        "contentUrl" : "services/data/v46.0/jobs/ingest/750c000000Atm7AAAR/batches", 
+        "lineEnding" : "CRLF", 
+        "columnDelimiter" : "COMMA" 
+    }
+
+# 2 - Upload de CSV
+    METHOD: PUT
+    URI: /services/data/v46.0/jobs/ingest/<JOB_ID>/batches
+
+    Headers:
+    Content-Type: text/csv
+    Accept: application/json
+
+    Body:
+    AnnualRevenue,BRAT_CHK_AUTORIZA_CONSULTA__c,BRAT_CKB_AUTORIZA_ENVIO__c,BRAT_DAT_FUNDACAO__c,BRAT_DAT_ULTIMA_ATUALIZACAO_CADASTRO__c,BRAT_LKU_RM_RESPONSAVEL__r.BRAT_NBR_COD_FUNCIONAL__c,BRAT_TXT_CAIXA_POSTAL__c,BRAT_NBR_COD_GRUPO_ECONOMICO_CNPJ__c,FinServ__BranchName__c,FinServ__CreditRating__c,FinServ__CustomerSegment__c,FinServ__SourceSystemId__c,Name,NumberOfEmployees,RecordTypeId,ShippingCity,ShippingCountry,ShippingPostalCode,ShippingState,ShippingStreet
+    ,,,,,1111111,,,,A1,LARGE CORPORATE,9935,DM - GE 5,,012c0000000Dos9AAC,,,,,
+    ,,,,,2222222,,,,C2,CORPORATE,9944,DM - GE 6,,012c0000000Dos9AAC,,,,,
+    450000.0,true,false,1958-11-06,2019-11-06,1111111,1169.0,3344.0,Nome Fantasia CNPJ 1 - GE 5,,,98561021000151,DM - CNPJ 1 - GE 5,100,012c0000000DosEAAS,Capão da Canoa,Brasil,95555-000,RS,Avenida Paraguassu 1975
+    350000.0,true,false,1984-11-15,2019-11-12,1111111,1122.0,3344.0,Nome Fantasia CNPJ 2 - GE 5,,,98561021000152,DM - CNPJ 2 - GE 5,50,012c0000000DosEAAS,São Sebastião,Brasil,11600-000,SP,Avenida Walkir Vergani 614
+    100000.0,false,true,1980-11-26,2011-11-17,2222222,6655.0,1122.0,Nome Fantasia CNPJ 1 - GE 6,,,98561021000153,DM - CNPJ 1 - GE 6,20,012c0000000DosEAAS,Rio de Janeiro,Brasil,22430-220,RJ,Rua José Linhares 244
+    900000.0,false,true,1963-11-13,2019-11-06,2222222,5566.0,1122.0,Nome Fantasia CNPJ 1 - GE 6,,,98561021000154,DM - CNPJ 2 - GE 6,20,012c0000000DosEAAS,Rio de Janeiro,Brasil,21511-350,RJ,Rua dos Topázios 02
+
+# 3 - Fechar Job
+    METHOD: PATCH
+    URI: /services/data/v46.0/jobs/ingest/<JOB_ID>
+
+    Headers:
+    Content-Type: application/json; charset=UTF-8
+    Accept: application/json
+
+    Body:
+    {
+        "state" : "UploadComplete"
+    }
+
+# 4 - Obter Status
+    METHOD: GET
+    URI: /services/data/v46.0/jobs/ingest/<JOB_ID>
+    URI: /services/data/v46.0/jobs/ingest/<JOB_ID>/*successfulResults*/
+    URI: /services/data/v46.0/jobs/ingest/<JOB_ID>/*failedResults*/
+
+    Headers:
+    Content-Type: application/json; charset=UTF-8
+    Accept: application/json
+

@@ -1,0 +1,21 @@
+The first step to create the job, is get the authentication token
+
+client_id=Consumer Key
+client_secret=Consumer Secret
+username=USER_NAME
+password=PASSWORD+SECURITY_TOKEN
+
+
+You do a post like that:
+
+https://login.salesforce.com/services/oauth2/token?grant_type=password&client_id=CLINET_ID&client_secret=CLIENT_SECRET&username=UserName@test.com&password=PASSWORD
+
+And get a return like that:
+{
+    "access_token": "XXX6g000000DXXX!ARwAQFaIsYD9IK3YV1iYdekFFNOyYEnA8QHxsK6Ab37F7ZNFXXXwgyLi7bpVL4I8Pa1YhwmSm5Y9dyRV2c9kjD3a78VgjXXX",
+    "instance_url": "https://ORGANIZATION.salesforce.com",
+    "id": "https://login.salesforce.com/id/XXX6g000000DoJvXXX/0056g000000VFFJXXX",
+    "token_type": "Bearer",
+    "issued_at": "1601861789115",
+    "signature": "VDlcw5dIaROMo1d5h3Du/+elDMQvE17ETvINW4oKPmw="
+}
