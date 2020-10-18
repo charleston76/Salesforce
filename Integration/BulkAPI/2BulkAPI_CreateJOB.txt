@@ -17,6 +17,15 @@ Body:
 		<contentType>XML</contentType> 
 	</jobInfo>
 
+    To make a request to import in csv format, just need change the type in the creation:
+        <?xml version="1.0" encoding="UTF-8"?> 
+        <jobInfo xmlns="http://www.force.com/2009/06/asyncapi/dataload"> 
+            <operation>insert</operation> 
+            <object>Account</object> 
+            <contentType>CSV</contentType> 
+        </jobInfo>
+
+
 
 An body example for Custom object:
     <?xml version="1.0" encoding="UTF-8"?> 

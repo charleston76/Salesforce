@@ -40,28 +40,40 @@ And get the job ID
 
 3 - Add the batches to the job (3BulkAPI_AddBatchTotheBulkJob.txt)
 
-	https://iteristesting-dev-ed.my.salesforce.com/services/async/49.0/job/7506g00000EY917AAD/batch
+	https://ORGANIZATION.salesforce.com/services/async/49.0/job/7506g00000EY917AAD/batch
 
 	Body example for custom Object
-<sObjects xmlns="http://www.force.com/2009/06/asyncapi/dataload">
-	<sObject>
-		<type>Treinamento__c</type>
-		<Name>Bulk API 01</Name>
-		<Descricao__c>Treinamento Bulk API 01</Descricao__c>
-	</sObject>
-	<sObject>
-		<type>Treinamento__c</type>
-		<Name>Bulk API 02</Name>
-		<Descricao__c>Treinamento Bulk API 02</Descricao__c>
-	</sObject>
-	<sObject>
-		<type>Treinamento__c</type>
-		<Name>Bulk API 03</Name>
-		<Descricao__c>Treinamento Bulk API 03</Descricao__c>
-	</sObject>
-	<sObject>
-		<type>Treinamento__c</type>
-		<Name>Bulk API 04</Name>
-		<Descricao__c>Treinamento Bulk API 04</Descricao__c>
-	</sObject>
-</sObjects>
+		<sObjects xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+			<sObject>
+				<Name>Bulk API 01</Name>
+				<Descricao__c>Treinamento Bulk API 01</Descricao__c>
+			</sObject>
+			<sObject>
+				<Name>Bulk API 02</Name>
+				<Descricao__c>Treinamento Bulk API 02</Descricao__c>
+			</sObject>
+			<sObject>
+				<Name>Bulk API 03</Name>
+				<Descricao__c>Treinamento Bulk API 03</Descricao__c>
+			</sObject>
+			<sObject>
+				<Name>Bulk API 04</Name>
+				<Descricao__c>Treinamento Bulk API 04</Descricao__c>
+			</sObject>
+		</sObjects>
+
+	Get this result
+		<?xml version="1.0" encoding="UTF-8"?>
+			<batchInfo
+			xmlns="http://www.force.com/2009/06/asyncapi/dataload">
+				<id>7516g00000F5YX9AAN</id>
+				<jobId>7506g00000EZbskAAD</jobId>
+				<state>Queued</state>
+				<createdDate>2020-10-12T20:27:41.000Z</createdDate>
+				<systemModstamp>2020-10-12T20:27:41.000Z</systemModstamp>
+				<numberRecordsProcessed>0</numberRecordsProcessed>
+				<numberRecordsFailed>0</numberRecordsFailed>
+				<totalProcessingTime>0</totalProcessingTime>
+				<apiActiveProcessingTime>0</apiActiveProcessingTime>
+				<apexProcessingTime>0</apexProcessingTime>
+			</batchInfo>
