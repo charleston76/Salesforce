@@ -24,6 +24,7 @@
 	</types>
 	<types>
 		<members>TreinamentoModuloTrigger</members>
+		<members>TRG_Treinamento</members>
 		<name>ApexTrigger</name>
 	</types>
 	<types>
@@ -40,6 +41,7 @@
 	</types>
 	<types>
 		<members>Authorize_Net_Setting__c</members>
+		<members>EVT_DEMONSTRATION__e</members>
 		<members>Inscricao__c</members>
 		<members>Modulo__c</members>
 		<members>Pagamento__c</members>
