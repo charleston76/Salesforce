@@ -1,0 +1,20 @@
+Change Data Capture Event (CDC Event)
+
+Different of the other streaming channels, for this one, you don't need specify the fields you want to push the notifications.
+When a CRUD happens, automatically all fields are notified, no matters where was the change.
+
+To apply it:
+    Setup > Change Data Capture
+
+    Select the available objects and move it to selected side.
+
+
+The subscription for the consumers are something like that:
+
+Change Data Capture Event: 
+    /data/<customObject__ChangeEvent>
+    /data/Treinamento__ChangeEvent
+    /data/<StandardObjectChangeEvent>
+    /data/AccountChangeEvent
+
+Push Topic Notification: /topic/<PushTopic>
