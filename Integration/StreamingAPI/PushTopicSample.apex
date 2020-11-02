@@ -59,3 +59,6 @@ SELECT Id,
 FROM PushTopic
 
 
+The subscription for the consumers are something like that:
+
+Push Topic Notification: /topic/<PushTopic>

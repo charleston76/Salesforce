@@ -1,0 +1,23 @@
+From setup > Integration > API menu, you can generate different WSDL files to integrate organizations or other consumers through the WSDL file.
+To do that you just create it from the options under "WSDL and Client Certificates" section:
+
+Enterprise WSDL
+    A strongly typed WSDL for customers who want to build an integration with their Salesforce organization only.
+    Sample file: EnterpriseWSDL.xml
+
+Partner WSDL
+    A loosely typed WSDL for customers, partners, and ISVs who are building client applications for multiple organizations. It can be used to access data within any organization.
+    Sample file: PartnerWSDL.xml
+
+There are other types you can check from this GUI, but now, we'll comment only about the two ones above.
+
+Generate WSDL for an apex class:
+
+Setup > Apex Classes, click in the class do you want create (SOAP_IntegrationAccount) and clicks on "Generate WSDL"
+    Sample file: SOAP_IntegrationAccount.xml
+
+In the other organization, you can create a consumer based in this wsdl file:
+    Setup > Apex Classes > Generate from WSDL
+And it will create 4 apex classes.
+But if appears the error message "Apex Generation File - Unsuported schema type... anyType", you need open the WSDL origin file, find the word "anyType" and replace with the actual type.
+From the created classess you'll need extract the endpoints, and save those as "Remote site settings".

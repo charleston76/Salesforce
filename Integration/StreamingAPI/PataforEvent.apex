@@ -15,3 +15,7 @@ To insert an event through the Worbench:
 Beyond this kinde of inclusion, in the real life, you can create a trigger in a object to insert a plataform event, accordling something
 happened in the real object.
 
+The subscription for the consumers are something like that:
+
+Plataform Event: 
+    /event/<Event>
