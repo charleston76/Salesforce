@@ -20,4 +20,4 @@ In the other organization, you can create a consumer based in this wsdl file:
     Setup > Apex Classes > Generate from WSDL
 And it will create 4 apex classes.
 But if appears the error message "Apex Generation File - Unsuported schema type... anyType", you need open the WSDL origin file, find the word "anyType" and replace with the actual type.
-From the created classess you'll need extract the endpoints, and save those as "Remote site settings".
+Within the created classess you'll need extract the endpoints, and save those as "Remote site settings".
