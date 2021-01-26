@@ -1,4 +1,4 @@
-Acter create a platform event (Setup > Plataform Event) anyone subscribed will receive the events inserted
+After create a platform event (Setup > Plataform Event) anyone subscribed will receive the events inserted
     EVT_DEMONSTRATION__e
 
 To insert an event through the Worbench: 

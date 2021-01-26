@@ -1,5 +1,5 @@
 Headers:
-    Authorization: Bearer +ACCESSS_TOKEN
+    Authorization: Bearer ACCESSS_TOKEN
 
 
 Example to post Account:
