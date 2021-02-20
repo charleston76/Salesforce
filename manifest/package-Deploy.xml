@@ -59,6 +59,10 @@
 		<name>CustomTab</name>
 	</types>
 	<types>
+		<members>ExternalService</members>
+		<name>ExternalServiceRegistration</name>
+	</types>
+	<types>
 		<members>Componentes_customizados</members>
 		<members>Inscricao_Customizada</members>
 		<members>TreinamentoApp_UtilityBar</members>
@@ -66,6 +70,7 @@
 	</types>
 	<types>
 		<members>Assistente_de_Inscri_o_Flow</members>
+		<members>FLW_ExternalService</members>
 		<name>Flow</name>
 	</types>
 	<types>
@@ -84,11 +89,16 @@
 		<name>LightningComponentBundle</name>
 	</types>
 	<types>
+		<members>NCR_ExternalService</members>
+		<name>NamedCredential</name>
+	</types>
+	<types>
 		<members>Treinamento_App_Permission_Set</members>
 		<name>PermissionSet</name>
 	</types>
 	<types>
 		<members>AuthorizeDotNetTest</members>
+		<members>ExternalService</members>
 		<name>RemoteSiteSetting</name>
 	</types>
 	<types>
