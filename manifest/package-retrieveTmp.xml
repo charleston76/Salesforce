@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>EVT_DEMONSTRATION__e</members>
-		<name>CustomObject</name>
+		<members>ExternalService</members>
+		<name>ExternalServiceRegistration</name>
 	</types>
-	<version>49.0</version>
+	<types>
+		<members>FLW_ExternalService</members>
+		<name>Flow</name>
+	</types>
+	<types>
+		<members>NCR_ExternalService</members>
+		<name>NamedCredential</name>
+	</types>
+	<types>
+		<members>ExternalService</members>
+		<name>RemoteSiteSetting</name>
+	</types>
+	<version>50.0</version>
 </Package>
