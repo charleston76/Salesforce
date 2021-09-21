@@ -1,0 +1,58 @@
+<aura:component controller="AnexoController" implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,forceCommunity:availableForAllPageTypes,force:hasRecordId">
+
+    <ltng:require scripts="{$Resource.XLSX}"/>
+
+    <aura:attribute name="arquivo" type="String"/>
+    <aura:attribute name="nomeArquivo" type="String"/>
+    <aura:attribute name="telaAnexosWrapper" type="Object"/>
+    <aura:attribute name="msgValidacao" type="String"/>
+    <aura:attribute name="accept" type="String"/>
+    <aura:attribute name="tipoSelecionado" type="String"/>
+    <aura:attribute name="idRegistroAnexo" type="String"/>
+    <aura:attribute name="loading" type="Boolean"/>
+
+    <!-- Permanece bloqueado enquanto o arquivo não é escolhido pela primeira vez para evitar falhas de validação -->
+    <aura:attribute name="bloqueado" type="Boolean" default="true"/> 
+
+    <aura:attribute name="ok" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{! c.doInit }"/>
+
+    <lightning:card>
+        <aura:if isTrue="{! v.loading }">
+            <lightning:spinner alternativeText="Carregando" size="medium" variant="base"/>
+        </aura:if>
+        <div class="slds-align_absolute-left">
+            <lightning:combobox aura:id="tipoAnexo" name="tipoAnexo" label="Tipo do Anexo" options="{!v.telaAnexosWrapper.opcoesTipoAnexo}" onchange="{! c.handleTipoAnexoChange }" value="{! v.tipoSelecionado }"/><br/>
+            <aura:if isTrue="{! v.tipoSelecionado == 'Base de Dados' }">
+                <lightning:input aura:id="fileInput" name="file1" type="file" label="Anexo" multiple="false" accept=".xlsx" disabled="{! v.bloqueado }" onchange="{! c.handleFilesChange }"/>
+                <aura:set attribute="else">
+                    <lightning:fileUpload label="Anexo"
+                    name="fileUploader"
+                    multiple="false"
+                    recordId="{!v.recordId}"
+                    onuploadfinished="{!c.handleUploadFinished}"
+                    disabled="{!v.bloqueado}" />
+                </aura:set>
+            </aura:if>
+            
+            
+        </div>
+        <div class="slds-text-body_small">
+            <div class="{!(v.ok) ? 'slds-text-color_success' : 'slds-text-color_error'}">
+                {!v.nomeArquivo}
+            </div>
+        </div>
+        
+        <div class="slds-align_absolute-left slds-m-top_large">
+            <aura:if isTrue="{! !v.ok }">
+                {! v.msgValidacao }
+                <aura:set attribute="else"> </aura:set>
+            </aura:if>
+        </div>
+        
+        <div class="slds-align_absolute-center slds-m-top_x-large">
+            <lightning:button variant="brand" label="Salvar" title="salvar" onclick="{! c.saveAction }" disabled="{! !v.ok }"/>
+        </div>
+    </lightning:card>
+    
+</aura:component>
