@@ -1,6 +1,7 @@
 public without sharing class AnexoController {
     static string CLASS_NAME = 'AnexoController';
 
+
     @AuraEnabled
     public static TelaAnexosWrapper obterInfoComponente() {
         String METHOD_NAME = 'obterInfoComponente';
@@ -20,11 +21,13 @@ public without sharing class AnexoController {
        // Validacao_Planilha__mdt vp = [
 	   //SELECT Id, Label, Colunas__c FROM Validacao_Planilha__mdt WHERE DeveloperName = 'XLSX_Padrao' LIMIT 1
        //];
-       String strClunas = '"Data de Nascimento","Gênero","Cidade","UF","Grau de Dependência","Situação","CID","Abrangência","Equivalência de Plano","Operadora Atual","Equivalência de Plano Fesp"';
-       system.debug(CLASS_NAME + ' ' + METHOD_NAME + ' strClunas.split(n) ' + strClunas.split('\n'));
+       //String strClunas = 'Codigo,Descricao, Quantidade,Valor';
+       //system.debug(CLASS_NAME + ' ' + METHOD_NAME + ' strClunas.split(n) ' + strClunas.split(','));
+       List<String> strReturn = new list<String> { 'Codigo' , 'Descricao' , 'Quantidade' ,'Valor'  };
        //System.debug(vp.Colunas__c?.split('\n'));
        //System.debug(JSON.serialize( vp.Colunas__c?.split('\n')));
-       return strClunas.split('\n');
+       //return strClunas.split(',');
+       return strReturn;
     }
 
     private static List<ComboboxWrapper> obterOpcoesTipoAnexo() {

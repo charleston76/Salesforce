@@ -114,6 +114,13 @@
                     var validacao = helper.validarColunas(component, event, helper, xl_row_object[0]);
                     if (validacao.ok) {
                         console.log(METHOD + ' Validação ok!');
+                        for (var i=0; i < xl_row_object.length; i++) {
+                            console.log(METHOD + ' Codigo ' + xl_row_object[i].Codigo);
+                            console.log(METHOD + ' Descricao ' + xl_row_object[i].Descricao);
+                            console.log(METHOD + ' Quantidade ' + xl_row_object[i].Quantidade);
+                            console.log(METHOD + ' CodValorigo ' + xl_row_object[i].Valor);
+                         }
+                
                     }
                     else {
                         console.log(METHOD + ' Validação não ok!');
@@ -137,7 +144,7 @@
     },
 
     validarColunas : function(component, event, helper, colunas) {
-        let METHOD = 'validarTamanho';
+        let METHOD = 'validarColunas';
 
         let attrColunasModeloProxy = component.get('v.telaAnexosWrapper').colunasXlsxBaseDados;
         let attrColunasModelo = new Array();
@@ -154,6 +161,8 @@
             console.log(METHOD + ' itemLower ' + itemLower);        
             attrColunasModelo.push(itemBruto);
             attrColunasModeloLower.push(itemLower);
+            console.log(METHOD + ' attrColunasModelo ' + attrColunasModelo);        
+            console.log(METHOD + ' attrColunasModeloLower ' + attrColunasModeloLower);        
         });
 
         console.log(METHOD + ' attrColunasModelo.length inicial: ' + attrColunasModelo.length);
@@ -166,7 +175,10 @@
         keys.forEach(function(item, index) {
             let itemBruto = item.trim();
             let itemLower = item.toLowerCase().trim();
-            console.log(METHOD + ' item ' + item + ' is included: ', attrColunasModeloLower.includes(itemLower));
+
+            //console.log(METHOD + ' itemBruto: ', itemBruto);
+            //console.log(METHOD + ' itemLower: ', itemLower);
+            //console.log(METHOD + ' item ' + item + ' is included: ', attrColunasModeloLower.includes(itemLower));
             if (attrColunasModeloLower.includes(itemLower)) {
                 //console.log(item.trim() + ' is being spliced');
                 //console.log(item.toLowerCase().trim() + ' is being spliced');
