@@ -1,6 +1,7 @@
 <aura:component controller="AnexoController" implements="flexipage:availableForAllPageTypes,force:lightningQuickAction,forceCommunity:availableForAllPageTypes,force:hasRecordId">
 
-    <ltng:require scripts="{$Resource.XLSX}"/>
+    <ltng:require scripts="{!$Resource.XLSX}"/>
+    
 
     <aura:attribute name="arquivo" type="String"/>
     <aura:attribute name="nomeArquivo" type="String"/>
@@ -23,7 +24,7 @@
         </aura:if>
         <div class="slds-align_absolute-left">
             <lightning:combobox aura:id="tipoAnexo" name="tipoAnexo" label="Tipo do Anexo" options="{!v.telaAnexosWrapper.opcoesTipoAnexo}" onchange="{! c.handleTipoAnexoChange }" value="{! v.tipoSelecionado }"/><br/>
-            <aura:if isTrue="{! v.tipoSelecionado == 'Base de Dados' }">
+            <aura:if isTrue="{! v.tipoSelecionado == 'Excel' }">
                 <lightning:input aura:id="fileInput" name="file1" type="file" label="Anexo" multiple="false" accept=".xlsx" disabled="{! v.bloqueado }" onchange="{! c.handleFilesChange }"/>
                 <aura:set attribute="else">
                     <lightning:fileUpload label="Anexo"

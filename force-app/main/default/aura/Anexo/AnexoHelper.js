@@ -16,14 +16,19 @@
     },
 
     definirExtensoesSuportadas : function(component, event, helper) {
+        let METHOD = 'definirExtensoesSuportadas';
+        
         let valorSelecionado = event.getSource().get('v.value');
         let extensoesSuportadas = '';
-        if (valorSelecionado == 'Base de Dados') {
+        console.log(METHOD + ' valorSelecionado ' + valorSelecionado);        
+
+        if (valorSelecionado == 'Excel') {
             extensoesSuportadas = '.xlsx';
         }
         else {
             extensoesSuportadas = undefined;
         }
+        console.log(METHOD + ' extensoesSuportadas ' + extensoesSuportadas);        
         component.set('v.accept', extensoesSuportadas);
     },
 
@@ -45,14 +50,21 @@
     },
 
     exibirNomeArquivo : function(component, fileInput) {
+        let METHOD = 'exibirNomeArquivo';
+        
         let nomeArquivo = fileInput[0].name;
+        console.log(METHOD + ' nomeArquivo ' + nomeArquivo);
         component.set('v.nomeArquivo', nomeArquivo);
         return nomeArquivo;
     },
 
     validarTamanho : function(component, event, helper, fileInput) {
+        let METHOD = 'validarTamanho';
         let arquivo = fileInput[0];
         let self = this;
+        console.log(METHOD + ' arquivo.size ' + arquivo.size);
+        console.log(METHOD + ' self.MAX_FILE_SIZE ' + self.MAX_FILE_SIZE);
+        
         if (arquivo.size > self.MAX_FILE_SIZE) {
             component.set('v.ok', false);
             component.set('v.msgValidacao', 'Tamanho limite do arquivo excedido: ' + (self.MAX_FILE_SIZE / 1000000) + ' MB');
@@ -62,8 +74,11 @@
     },
 
     validarPorFormato : function(component, event, helper, nomeArquivo) {
+        let METHOD = 'validarPorFormato';
         let tipoSelecionado = component.get('v.tipoSelecionado');
-        if (nomeArquivo.includes('.xlsx') && tipoSelecionado == 'Base de Dados') {
+        console.log(METHOD + ' tipoSelecionado ' + tipoSelecionado);        
+        console.log(METHOD + ' nomeArquivo ' + nomeArquivo);        
+        if (nomeArquivo.includes('.xlsx') && tipoSelecionado == 'Excel') {
             helper.validarXlsx(component, event, helper);
         }
         else {
@@ -72,29 +87,36 @@
     },
 
     validarXlsx : function(component, event, helper) {
+
+        let METHOD = 'validarXlsx';
         let files = component.find('fileInput').get('v.files');
+        console.log(METHOD + ' files ' + files);
 
         let reader = new FileReader();
         reader.onload = function() {
             component.set('v.arquivo', reader.result);
             if (files.length > 0) {
-                console.log('Convertendo para JSON...');
+                console.log(METHOD + ' Convertendo para JSON...');
                 var workbook;
                 var msgValidacao;
                 var ok = false;
                 try {
                     workbook = XLSX.read(reader.result, {type: 'binary'});
-                    console.log('workbook: ', workbook);
+                    console.log(METHOD + ' workbook: ', workbook);
                     let primeiroSheet = Object.keys(workbook.Sheets)[0];
-                    console.log('First key: ', primeiroSheet);
+                    console.log(METHOD + ' First key: ', primeiroSheet);
                     var xl_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[primeiroSheet], {defval: ''}, {blankrows: true});
-                    console.log('xl_row_object: ', xl_row_object);
+                    console.log(METHOD + ' xl_row_object: ', xl_row_object);
+                    //============================================================================
+                    //= Com este objeto vc consegue definir as linhas onde se inicia a leitura
+                    //============================================================================
+                    xl_row_object[0]
                     var validacao = helper.validarColunas(component, event, helper, xl_row_object[0]);
                     if (validacao.ok) {
-                        console.log('Validação ok!');
+                        console.log(METHOD + ' Validação ok!');
                     }
                     else {
-                        console.log('Validação não ok!');
+                        console.log(METHOD + ' Validação não ok!');
                         msgValidacao = 'Ops! As seguintes colunas não foram correspondidas: '
                         + validacao.colunasNaoCorrespondidas;
                     }
@@ -103,8 +125,8 @@
                 catch (err) {
                     ok = false;
                     msgValidacao = 'Ocorreu um erro inesperado! Por favor verifique seu arquivo ou contate sua equipe de suporte';
-                    console.error(err.message);
-                    console.error('Stack Trace: ' + err.stackTrace);
+                    console.error(' err.message ' + err.message);
+                    console.error(' Stack Trace: ' + err.stackTrace);
                     alert(msgValidacao);
                 }
                 component.set('v.ok', ok);
@@ -115,27 +137,36 @@
     },
 
     validarColunas : function(component, event, helper, colunas) {
+        let METHOD = 'validarTamanho';
+
         let attrColunasModeloProxy = component.get('v.telaAnexosWrapper').colunasXlsxBaseDados;
         let attrColunasModelo = new Array();
         let attrColunasModeloLower = new Array();
+
+        console.log(METHOD + ' attrColunasModeloProxy ' + attrColunasModeloProxy);        
+        console.log(METHOD + ' attrColunasModelo ' + attrColunasModelo);        
+        console.log(METHOD + ' attrColunasModeloLower ' + attrColunasModeloLower);        
+
         attrColunasModeloProxy.forEach(function(item, index) {
             let itemBruto = item.trim();
             let itemLower = item.toLowerCase().trim();
+            console.log(METHOD + ' itemBruto ' + itemBruto);        
+            console.log(METHOD + ' itemLower ' + itemLower);        
             attrColunasModelo.push(itemBruto);
             attrColunasModeloLower.push(itemLower);
         });
 
-        console.log('attrColunasModelo.length inicial: ' + attrColunasModelo.length);
-        console.log('attrColunasModelo: ', attrColunasModelo);
+        console.log(METHOD + ' attrColunasModelo.length inicial: ' + attrColunasModelo.length);
+        console.log(METHOD + ' attrColunasModelo: ', attrColunasModelo);
         //var colunasModeloArray = helper.colunasModelo2Array(colunasModelo);
         //console.log('colunasModeloArray:', colunasModeloArray);
         let keys = Object.keys(colunas);
-        console.log('Keys: ', keys);
+        console.log(METHOD + ' Keys: ', keys);
         let spliced = 0;
         keys.forEach(function(item, index) {
             let itemBruto = item.trim();
             let itemLower = item.toLowerCase().trim();
-            console.log(item + ' is included: ', attrColunasModeloLower.includes(itemLower));
+            console.log(METHOD + ' item ' + item + ' is included: ', attrColunasModeloLower.includes(itemLower));
             if (attrColunasModeloLower.includes(itemLower)) {
                 //console.log(item.trim() + ' is being spliced');
                 //console.log(item.toLowerCase().trim() + ' is being spliced');

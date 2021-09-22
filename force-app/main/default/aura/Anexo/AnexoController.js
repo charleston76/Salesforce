@@ -10,8 +10,11 @@
     },
 
     handleFilesChange : function(component, event, helper) {
+        let METHOD = 'handleFilesChange';
         let fileInput = event.getSource().get('v.files');
         let nomeArquivo = helper.exibirNomeArquivo(component, fileInput);
+        console.log(METHOD + ' fileInput ' + fileInput);        
+        console.log(METHOD + ' nomeArquivo ' + nomeArquivo);        
         if (helper.validarTamanho(component, event, helper, fileInput)) {
             helper.validarPorFormato(component, event, helper, nomeArquivo);    
         }
