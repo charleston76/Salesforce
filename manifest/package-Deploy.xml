@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
+		<members>AnexoController</members>
 		<members>API_authorizeDotNet</members>
 		<members>backEndApexTraining</members>
+		<members>ComboboxWrapper</members>
 		<members>FiltroInscricao</members>
 		<members>FiltroModulo</members>
 		<members>FiltroTreinamento</members>
@@ -13,6 +15,7 @@
 		<members>InscricaoController_Test</members>
 		<members>REST_IntegrationTreinamentoService</members>
 		<members>SOAP_IntegrationAccount</members>
+		<members>TelaAnexosWrapper</members>
 		<members>TestDataFactory</members>
 		<members>TreinamentoController</members>
 		<members>TreinamentoModuloHelperClass</members>
@@ -28,6 +31,7 @@
 		<name>ApexTrigger</name>
 	</types>
 	<types>
+		<members>Anexo</members>
 		<members>AuraListView</members>
 		<name>AuraDefinitionBundle</name>
 	</types>
