@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>ExternalService</members>
-		<name>ExternalServiceRegistration</name>
+		<members>AnexoController</members>
+		<members>ComboboxWrapper</members>
+		<members>TelaAnexosWrapper</members>
+		<name>ApexClass</name>
 	</types>
 	<types>
-		<members>FLW_ExternalService</members>
-		<name>Flow</name>
+		<members>Anexo</members>
+		<name>AuraDefinitionBundle</name>
 	</types>
-	<types>
-		<members>NCR_ExternalService</members>
-		<name>NamedCredential</name>
-	</types>
-	<types>
-		<members>ExternalService</members>
-		<name>RemoteSiteSetting</name>
-	</types>
-	<version>50.0</version>
+	<version>51.0</version>
 </Package>
